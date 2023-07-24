@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$inter-font: "Inter", sans-serif;
+$inputColor: #f6f5f8;
+
+.inputWrapper {
+    padding-bottom: 12px;
+}
+
+.label {
+  display: flex;
+  position: relative;
+  width: 510px;
+
+}
+
+.input {
+  height: 48px;
+  background-color: $inputColor;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  padding-left: 40px;
+  font-size: 16px;
+  font-family: $inter-font;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  position: absolute;
+  left: 9px;
+  top: 14px;
+}

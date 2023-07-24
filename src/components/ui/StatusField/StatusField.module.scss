@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap");
+
+$inter: "Inter", sans-serif;
+$Lora: "Lora", serif;
+$basicColor: #484848;
+$labelColor: #A0A0A0;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 150px;
+}
+
+.labelTextGreen {
+  color: #678870;
+  width: 70px;
+  padding-top: 3px;
+  padding-right: 10px;
+}
+
+.labelTextRed {
+  color: #DC6B61;
+  width: 70px;
+  padding-top: 3px;
+  padding-right: 10px;
+}
+
+
+
+
+

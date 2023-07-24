@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$inter-font: "Inter", sans-serif;
+$white: #FFF;
+
+$backgroundColor: #484848;
+
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding-top: 12px;
+}
+
+.items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.item {
+    margin-left: 43px;
+}
+
+.countBlock {
+  background-color: $backgroundColor;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  font-family: $inter-font;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  color: $white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

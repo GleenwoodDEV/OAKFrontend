@@ -1,0 +1,82 @@
+import { useState } from "react";
+import styles from "./CameraTableRow.module.scss";
+import { DeleteBtnSVG, EditBtnSVG, SaveBtnSVG } from "../../../../assets/icons";
+import InputText from "../../../../components/ui/InputText";
+import StatusField from "../../../../components/ui/StatusField";
+import {
+  useDeleteCamerasMutation,
+  useUpdateCamerasMutation,
+} from "../../../../store/api/CamerasApi";
+import InputCell from "../../../../components/ui/InputCell";
+
+const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
+  const [editedRow, setEditedRow] = useState(null);
+
+  const { id } = rowData;
+  const [name, setName] = useState(rowData.name);
+  const [rtspfeed1, setRtspfeed1] = useState(rowData.rtspfeed1);
+  const [rtspfeed2, setRtspfeed2] = useState(rowData.rtspfeed2);
+  const [timeOn, setTimeOn] = useState(rowData.timeOn);
+  const [timeFinish, setTimeOff] = useState(rowData.timeFinish);
+  const [status, setStatus] = useState(rowData.status);
+
+  const body = { name, rtspfeed1, rtspfeed2, timeOn, timeFinish };
+
+  const [deleteRow] = useDeleteCamerasMutation();
+  const [updateRow] = useUpdateCamerasMutation();
+
+  const handleSaveBtn = () => {
+    setEditedRow(null);
+    updateRow({ id, body });
+  };
+
+  return (
+    <tr key={id}>
+      <td className={styles.id}>{id}</td>
+      <InputCell value={name} onChange={setName} edited={id === editedRow} />
+      <InputCell
+        value={rtspfeed1}
+        onChange={setRtspfeed1}
+        edited={id === editedRow}
+      />
+      <InputCell
+        value={rtspfeed2}
+        onChange={setRtspfeed2}
+        edited={id === editedRow}
+      />
+      <InputCell
+        value={timeOn}
+        onChange={setTimeOn}
+        edited={id === editedRow}
+      />
+      <InputCell
+        value={timeFinish}
+        onChange={setTimeOff}
+        edited={id === editedRow}
+      />
+      <td>
+        <StatusField
+          valueSwitcher={{ active: "On", disable: "Off" }}
+          activeSwitch={status}
+          editableMode={id === editedRow}
+        />
+      </td>
+      <td className={styles.btnItems}>
+        {id === editedRow ? (
+          <SaveBtnSVG
+            className={styles.btnSVG}
+            onClick={() => handleSaveBtn(id)}
+          />
+        ) : (
+          <EditBtnSVG
+            className={styles.btnSVG}
+            onClick={() => setEditedRow(id)}
+          />
+        )}
+        <DeleteBtnSVG className={styles.btnSVG} onClick={() => deleteRow(id)} />
+      </td>
+    </tr>
+  );
+};
+
+export default CameraTableRow;

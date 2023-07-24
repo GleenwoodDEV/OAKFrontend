@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$theader: #f0eff2;
+
+$inter: "Inter", sans-serif;
+
+tr {
+  height: 48px;
+  font-size: 16px;
+  font-family: $inter;
+  font-weight: 500;
+}
+
+tr:hover {
+  background-color: #f6f5f8;
+}
+
+th,
+td {
+  border-bottom: 1px solid;
+  border-color: $theader;
+  vertical-align: middle;
+}
+
+.id {
+  opacity: 50%;
+}
+
+.btnItems {
+  width: 80px;
+  text-align: end;
+}
+.btnSVG {
+  cursor: pointer;
+  height: 31px;
+  width: 28px;
+  margin-right: 7px;
+}

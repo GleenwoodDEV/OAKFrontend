@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$theader: #f0eff2;
+
+$inter: "Inter", sans-serif;
+
+.business_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 340px;
+  height: 300px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+img { 
+  height: 170px;
+  width: 340px;
+}
+
+
+.business_info {
+  width: 340px;
+  height: 130px;
+}
+
+.description {
+  padding-left: 15px;
+  padding-top: 14px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons_div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90px;
+}
+
+.icon_background {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #f6f5f8;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.business_card:hover {
+  background: #f0eff2;
+}
+
+.business_name {
+  font-family: $inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #484848;
+}
+
+.time_info {
+  color: #a0a0a0;
+  font-family: $inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.contact_info {
+  color: #484848;
+  font-family: $inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.phone_info,
+.adress {
+  padding-bottom: 5px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.contact_icon {
+  padding-right: 8px;
+}

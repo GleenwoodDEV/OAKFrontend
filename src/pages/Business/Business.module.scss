@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$theader: #f0eff2;
+
+$inter: "Inter", sans-serif;
+
+.business_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  left: 120px;
+  width: 1259px;
+  height: 1079px;
+  padding-top: 12px;
+}
+
+.button_create {
+  display: block;
+}
+
+.map_content {
+  display: flex;
+  width: 1259px;
+  height: 1079px;
+  border: 1px solid;
+  border-color: $theader;
+  border-radius: 10px;
+}
+
+.business_items {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.business_items::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.search_bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search_btn_wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 390px;
+}
+
+.map_wrapper {
+  position: relative;
+  display: block;
+  width: 919px;
+  height: 1079px;
+}
+
+.map_wrapper {
+  cursor: url("../../assets/icons/add-pin.svg") 27 80, auto;
+}
+
+.map {
+  width: 919px;
+  height: 1079px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+  padding-top: 12px;
+}
+
+.pinWrapper {
+  position: absolute;
+  z-index: 10;
+}
+
+.pinWrapper:hover {
+  z-index: 100;
+}
+
+.pinWrapper svg:hover {
+  color: red;
+  cursor: pointer;
+}
