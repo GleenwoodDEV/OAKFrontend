@@ -89,31 +89,31 @@ const CreateModal = (props, setShowModal) => {
 
           <div className={styles.input_items}>
             <InputText
-              background_color="#F6F5F8"
-              labelName="CameraName"
+              backgroundColor="#F6F5F8"
+              labelName="Camera Name"
               value={name}
               onChange={setName}
             />
             <InputText
-              background_color="#F6F5F8"
+              backgroundColor="#F6F5F8"
               labelName="Slot 1"
               value={rtspfeed1}
               onChange={setSlot1}
             />
             <InputText
-              background_color="#F6F5F8"
+              backgroundColor="#F6F5F8"
               labelName="Slot 2"
               value={rtspfeed2}
               onChange={setSlot2}
             />
             <InputText
-              background_color="#F6F5F8"
+              backgroundColor="#F6F5F8"
               labelName="Switch on Time"
               value={timeOn}
               onChange={setTimeOn}
             />
             <InputText
-              background_color="#F6F5F8"
+              backgroundColor="#F6F5F8"
               labelName="Switch off Time"
               value={timeFinish}
               onChange={setTimeOff}

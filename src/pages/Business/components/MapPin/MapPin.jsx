@@ -6,6 +6,7 @@ const MapPin = (props) => {
   return (
     <div
       className={clsx([styles.pinWrapper, props.active && styles.active])}
+      onClick={props.onClick}
       style={{
         top: props.y - 80,
         left: props.x - 27,

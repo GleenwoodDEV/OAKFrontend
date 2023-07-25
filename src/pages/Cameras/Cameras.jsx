@@ -41,10 +41,6 @@ const Cameras = (props) => {
     setSearchValue(e.target.value);
   };
 
-  // if (!isLoggedIn) {
-  //   return <Navigate to="/login" />;
-  // }
-
   return (
     <>
       {isLoading ? (

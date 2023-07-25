@@ -15,8 +15,6 @@ import {
 import { ThreeDots } from "react-loader-spinner";
 import MapWrapper from "./components/MapWrapper";
 import BusinessInfoPanel from "./components/BusinessInfoPanel";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import { BusinessType } from "./components/BusinessAddItem/BusinessAddItem";
 
 const Business = () => {
@@ -26,9 +24,16 @@ const Business = () => {
   const [panelMode, setPanelMode] = useState("VIEW_MODE");
   const [editCoordinates, setEditCoordinates] = useState({});
   const [editType, setEditType] = useState(BusinessType.bar);
+  const [editBusiness, setEditBusiness] = useState(null);
 
   const handleAddMod = () => {
     setPanelMode("ADD_PIN_MODE");
+    setEditBusiness(null);
+  };
+
+  const handleSelectBusiness = (business) => {
+    setPanelMode("EDIT_MODE");
+    setEditBusiness(business);
   };
 
   const handleClickMap = (e) => {
@@ -40,6 +45,11 @@ const Business = () => {
     }
   };
 
+  const handleClose = () => {
+    setPanelMode("VIEW_MODE");
+    setEditBusiness(null);
+  };
+
   const handleSave = (values) => {
     const saveValues = {
       ...values,
@@ -47,14 +57,8 @@ const Business = () => {
       pinY: editCoordinates.y,
     };
     addBusiness(saveValues);
-    setPanelMode("VIEW_MODE");
+    handleClose();
   };
-
-  //const { isLoggedIn } = useSelector((state) => state.auth);
-
-  // if (!isLoggedIn) {
-  //   return <Navigate to="/login" />;
-  // }
 
   return (
     <>
@@ -81,12 +85,17 @@ const Business = () => {
                 mode={panelMode}
                 onSave={handleSave}
                 onChangeType={setEditType}
+                onSelectBusiness={handleSelectBusiness}
+                editBusiness={editBusiness}
+                handleClose={handleClose}
               />
               <MapWrapper
                 data={data}
                 handleClickMap={handleClickMap}
                 mode={panelMode}
                 editPin={{ coords: editCoordinates, editType }}
+                editBusiness={editBusiness}
+                onSelectBusiness={handleSelectBusiness}
               />
             </div>
           </div>
