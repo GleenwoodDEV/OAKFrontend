@@ -16,7 +16,7 @@ const Cameras = (props) => {
   const [searchValue, setSearchValue] = useState("");
 
   const { isLoading, data } = useGetCamerasQuery(searchValue);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  //const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headers = [
     "",
@@ -41,9 +41,9 @@ const Cameras = (props) => {
     setSearchValue(e.target.value);
   };
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Navigate to="/login" />;
+  // }
 
   return (
     <>

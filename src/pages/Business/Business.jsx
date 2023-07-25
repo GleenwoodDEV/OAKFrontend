@@ -50,11 +50,11 @@ const Business = () => {
     setPanelMode("VIEW_MODE");
   };
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  //const { isLoggedIn } = useSelector((state) => state.auth);
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Navigate to="/login" />;
+  // }
 
   return (
     <>
