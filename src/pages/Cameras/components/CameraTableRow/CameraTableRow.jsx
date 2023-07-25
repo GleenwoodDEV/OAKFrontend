@@ -4,6 +4,7 @@ import { DeleteBtnSVG, EditBtnSVG, SaveBtnSVG } from "../../../../assets/icons";
 import InputText from "../../../../components/ui/InputText";
 import StatusField from "../../../../components/ui/StatusField";
 import {
+  useChangeCameraStatusMutation,
   useDeleteCamerasMutation,
   useUpdateCamerasMutation,
 } from "../../../../store/api/CamerasApi";
@@ -18,16 +19,25 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
   const [rtspfeed2, setRtspfeed2] = useState(rowData.rtspfeed2);
   const [timeOn, setTimeOn] = useState(rowData.timeOn);
   const [timeFinish, setTimeOff] = useState(rowData.timeFinish);
-  const [status, setStatus] = useState(rowData.status);
+  const [status, setStatus] = useState(!rowData.status);
 
-  const body = { name, rtspfeed1, rtspfeed2, timeOn, timeFinish };
+  const body = { name, rtspfeed1, rtspfeed2, timeOn, timeFinish, status };
+
+  const [newBlockStatus, setNewBlockStatus] = useState("");
 
   const [deleteRow] = useDeleteCamerasMutation();
   const [updateRow] = useUpdateCamerasMutation();
+  const [changeCameraStatus] = useChangeCameraStatusMutation();
 
   const handleSaveBtn = () => {
     setEditedRow(null);
-    updateRow({ id, body });
+    if (status !== newBlockStatus) {
+      changeCameraStatus(id);
+    }
+  };
+
+  const handleStatus = (checked) => {
+    setNewBlockStatus(checked);
   };
 
   return (
@@ -59,6 +69,7 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
           valueSwitcher={{ active: "On", disable: "Off" }}
           activeSwitch={status}
           editableMode={id === editedRow}
+          handleStatus={handleStatus}
         />
       </td>
       <td className={styles.btnItems}>

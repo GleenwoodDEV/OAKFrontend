@@ -10,14 +10,22 @@ export const usersApi = createApi({
   }),
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => `/search/?q=`,
-      providesTags: () => [
+      query: (searchTerm) => `/search/?search=${searchTerm}`,
+      providesTags: (searchTerm) => [
         {
           type: "users",
+          id: searchTerm,
         },
       ],
+    }),
+    banUsers: builder.mutation({
+      query: (id) => ({
+        url: `/1/${id}/blockUser`,
+        method: "PUT",
+      }),
+      invalidatesTags: () => [{ type: "users" }],
     }),
   }),
 });
 
-export const { useGetUsersQuery } = usersApi;
+export const { useGetUsersQuery, useBanUsersMutation } = usersApi;

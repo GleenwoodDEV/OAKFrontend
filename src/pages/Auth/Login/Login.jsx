@@ -1,8 +1,6 @@
 import styles from "./Login.module.scss";
 import formStyles from "../Auth.module.scss";
 import { Logo } from "../../../assets/icons";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +10,7 @@ import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
 import { useState } from "react";
 import { login } from "../../../store/slices/auth";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,33 +18,26 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState("");
 
-  const {isLoggedIn} = useSelector((state) => state.auth);
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({email,password}))
-    .unwrap()
-    .then(() => {
-      navigate("/users");
-    })
-    .catch(() => {
-    });
+    setLoading(true);
+    dispatch(login({ email, password }))
+      .unwrap()
+      .then(() => {
+        navigate('/users');
+      })
+      .catch(() => {
+        setLoading(false)
+      });
   };
 
-  if (isLoggedIn) {
+  if(isLoggedIn) {
     return <Navigate to="/users" />;
   }
-
-  const handleChangeInput = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChangePwd = (e) => {
-    setPassword(e.target.value);
-  };
-
-
 
   return (
     <div className={formStyles.loginWrapper}>
@@ -64,14 +56,14 @@ const Login = () => {
                 <InputText
                   styleName='InputForm'
                   labelName="Email"
-                  onChange={handleChangeInput}
                   value={email}
+                  onChange={setEmail}
                 />
               </div>
               <div className={formStyles.password}>
                 <InputPassword
                   labelName="Password"
-                  onChange={handleChangePwd}
+                  onChange={setPassword}
                   value={password}
                 />
               </div>

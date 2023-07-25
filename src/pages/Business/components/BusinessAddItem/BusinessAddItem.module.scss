@@ -1,0 +1,85 @@
+.business_card {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 340px;
+  background: #f6f5f8;
+}
+
+.article {
+  width: 340px;
+  text-align: center;
+  font-family: Lora;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 117%;
+  padding: 10px;
+  color: #484848;
+}
+
+.addPhoto {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 340px;
+  height: 200px;
+  color: #484848;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 117%;
+  background: #eaeaeb;
+  margin-bottom: 12px;
+}
+
+.addPhoto img {
+  object-fit: cover;
+}
+
+.inputItems {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
+.labelTypes {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 318px;
+  height: 17px;
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.types {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  gap: 16px;
+}
+
+.typeItem {
+  display: flex;
+  gap: 18px;
+}
+
+.buttons {
+  padding-top: 35px;
+  display: flex;
+  gap: 18px;
+}

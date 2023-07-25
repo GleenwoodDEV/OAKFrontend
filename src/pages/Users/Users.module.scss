@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora&display=swap");
+
+$theader: #f0eff2;
+
+$inter: "Inter", sans-serif;
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -6,4 +12,21 @@
   width: 1202px;
   height: 82%;
   padding-top: 12px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+  padding-top: 12px;
+}
+
+.noDataCap {
+  display: flex;
+  justify-content: center;
+  font-family: $inter;
+  font-size: 24px;
+  font-weight: 600;
+  color: #484848;
 }

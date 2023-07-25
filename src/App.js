@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 
 
 import NavBar from "./components/NavBar";
@@ -14,9 +14,7 @@ import Business from "./pages/Business";
 
 
 function App() {  
-
-  const [location, setLocation] = useState('');
-
+  const location = useLocation().pathname;
   
   return (
     <div className="App">

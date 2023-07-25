@@ -1,0 +1,14 @@
+.pinWrapper {
+  position: absolute;
+  z-index: 10;
+}
+
+.pinWrapper:hover {
+  z-index: 100;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.pinWrapper.active svg {
+  color: #dc6b61;
+}

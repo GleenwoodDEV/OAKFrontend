@@ -1,4 +1,4 @@
-import styles from "./BusinessInfo.module.scss";
+import styles from "./BusinessListItem.module.scss";
 import businessPhoto from "../../../../assets/business.png";
 import {
   InstagramSVG,
@@ -7,10 +7,10 @@ import {
   WebsiteSVG,
 } from "../../../../assets/icons";
 
-const BusinessInfo = ({ info }) => {
+const BusinessListItem = ({ info }) => {
   return (
     <div className={styles.business_card}>
-      <img className={styles.cardPhoto} src={businessPhoto} alt="nophoto"></img>
+      <img className={styles.cardPhoto} src={info.photo} alt="nophoto"></img>
       <div className={styles.business_info}>
         <div className={styles.description}>
           <div className={styles.name_wrap}>
@@ -19,10 +19,14 @@ const BusinessInfo = ({ info }) => {
           </div>
           <div className={styles.icons_div}>
             <div className={styles.icon_background}>
-              <WebsiteSVG className={styles.icon} />
+              <a href={info.link}>
+                <WebsiteSVG className={styles.icon} />
+              </a>
             </div>
             <div className={styles.icon_background}>
-              <InstagramSVG className={styles.icon} />
+              <a href={info.instagram}>
+                <InstagramSVG className={styles.icon} />
+              </a>
             </div>
           </div>
         </div>
@@ -41,4 +45,4 @@ const BusinessInfo = ({ info }) => {
   );
 };
 
-export default BusinessInfo;
+export default BusinessListItem;

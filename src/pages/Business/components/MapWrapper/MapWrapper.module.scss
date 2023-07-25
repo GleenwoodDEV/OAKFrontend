@@ -22,7 +22,6 @@ $inter: "Inter", sans-serif;
   display: flex;
   width: 1259px;
   height: 1079px;
-  margin-top: 70px;
   border: 1px solid;
   border-color: $theader;
   border-radius: 10px;
@@ -50,9 +49,9 @@ $inter: "Inter", sans-serif;
   height: 1079px;
 }
 
-// .map_wrapper {
-//   cursor: url("../../assets/icons/add-pin.svg") 27 80, auto;
-// }
+.map_wrapper.edit {
+  cursor: url("../../../../assets/icons/add-pin.svg") 27 80, auto;
+}
 
 .map {
   width: 919px;
@@ -74,9 +73,10 @@ $inter: "Inter", sans-serif;
 
 .pinWrapper:hover {
   z-index: 100;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.pinWrapper svg:hover {
+.pinWrapper.active svg {
   color: #dc6b61;
-  cursor: pointer;
 }

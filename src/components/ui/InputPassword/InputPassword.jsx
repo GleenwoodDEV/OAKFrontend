@@ -14,7 +14,7 @@ const InputPassword = (props) => {
     <div>
       <div className={styles.labeldiv}>{props.labelName}</div>
       <label className={styles.label} htmlFor={styles.input}>
-        <input type={visible ? "text" : "password"} className={styles.input} onChange={props.onChange} value={props.value}/>
+        <input type={visible ? "text" : "password"} className={styles.input} onChange={(e) => props.onChange(e.target.value)} value={props.value}/>
         <Eye className={styles.eye} onClick={eyeClick} />
       </label>
     </div>

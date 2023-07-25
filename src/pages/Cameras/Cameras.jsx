@@ -8,26 +8,26 @@ import CreateModal from "./components/CreateModal";
 import { useEffect } from "react";
 import CameraTableRow from "./components/CameraTableRow";
 import { ThreeDots } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const Cameras = (props) => {
-  const { isLoading, data } = useGetCamerasQuery();
-
-  const [headers, setHeaders] = useState([]);
-
-  useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
-    const headersAll = Object.keys(data[0]);
-    const filteredHeaders = headersAll.filter(
-      (item) => item !== "createdAt" && item !== "updatedAt"
-    );
-
-    setHeaders([...filteredHeaders, ""]);
-  }, [isLoading, data]);
-
   const [showModal, setShowModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  const { isLoading, data } = useGetCamerasQuery(searchValue);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const headers = [
+    "",
+    "Camera Name",
+    "Slot 1",
+    "Slot 2",
+    "Switch on Time",
+    "Switch off Time",
+    "Status",
+    " ",
+  ];
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -35,6 +35,15 @@ const Cameras = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchValue(e.target.value);
+  };
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
@@ -49,21 +58,25 @@ const Cameras = (props) => {
             handleCloseModal={handleCloseModal}
           />
           <div className={styles.search_bar}>
-            <InputSearch />
+            <InputSearch value={searchValue} onChange={handleSearch} />
             <ButtonCreate
               text="Add new Camera"
               onCustomClick={handleOpenModal}
             />
           </div>
-          <Table headers={headers}>
-            {data.map((rowData) => (
-              <CameraTableRow
-                key={rowData.id}
-                rowData={rowData}
-                handleSaveEditRow={() => console.log("a")}
-              />
-            ))}
-          </Table>
+          {data.length > 0 ? (
+            <Table headers={headers}>
+              {data.map((rowData) => (
+                <CameraTableRow
+                  key={rowData.id}
+                  rowData={rowData}
+                  handleSaveEditRow={() => console.log("a")}
+                />
+              ))}
+            </Table>
+          ) : (
+            <div className={styles.noDataCap}>No data</div>
+          )}
         </div>
       )}
     </>

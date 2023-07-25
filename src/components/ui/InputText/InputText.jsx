@@ -6,9 +6,10 @@ const InputText = (props) => {
       <div className={styles.labeldiv}>{props.labelName}</div>
       <label className={styles.label} htmlFor={styles.input}>
         <input
-          style={{ width: props.width, background: props.background_color }}
+          id={props.id}
+          style={{ width: props.width }}
           className={styles.input}
-          onChange={e => props.onChange(e.target.value)}
+          onChange={(e) => props.onChange(e.target.value, e)}
           value={props.value}
         />
       </label>

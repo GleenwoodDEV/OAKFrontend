@@ -1,0 +1,13 @@
+.business_items {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: pointer;
+}
+
+.business_items::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

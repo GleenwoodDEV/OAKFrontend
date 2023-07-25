@@ -6,40 +6,49 @@ import { useGetUsersQuery } from "../../store/api/UsersApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import UsersTableRow from "./components/UsersTableRow/UsersTableRow";
+import { ThreeDots } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+
+const headers = ["", "Name", "Email", "Phone", "Status", " "];
 
 const Users = () => {
-  const { isLoading, data } = useGetUsersQuery();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const [searchValue, setSearchValue] = useState("");
+  const { isLoading, data } = useGetUsersQuery(searchValue);
 
-  const [headers, setHeaders] = useState([]);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchValue(e.target.value);
+  };
 
-  useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
-    const headersAll = Object.keys(data[0]);
-    const filteredHeaders = headersAll.filter((item) => item !== "role");
-
-    setHeaders([...filteredHeaders, ""]);
-  }, [isLoading, data]);
+  if (!isLoggedIn) {
+    console.log(isLoggedIn);
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className={styles.spinner}>
+          <ThreeDots color="#adbeba" width="60" />
+        </div>
       ) : (
         <div className={styles.wrapper}>
-          <InputSearch />
-          <Table headers={headers}>
-            {data.map((rowData) => (
-              <UsersTableRow
-                key={rowData.id}
-                rowData={rowData}
-                handleSaveEditRow={() => console.log("a")}
-              />
-            ))}
-          </Table>
-          <Pagination />
+          <InputSearch value={searchValue} onChange={handleSearch} />
+
+          {data.length > 0 ? (
+            <>
+              <Table headers={headers}>
+                {data.map((rowData) => (
+                  <UsersTableRow key={rowData.id} rowData={rowData} />
+                ))}
+              </Table>
+              <Pagination />
+            </>
+          ) : (
+            <div className={styles.noDataCap}>No data</div>
+          )}
         </div>
       )}
     </>

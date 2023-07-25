@@ -1,58 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora:wght@600&display=swap");
 
 $Lora: "Lora", serif;
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .modal {
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    background-color: #FFF;
-    overflow: auto;
-    outline: none;
-    padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
 }
 
 .elementsWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 458px;
+  display: flex;
+  flex-direction: column;
+  width: 458px;
 }
 
 .buttonClose_div {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
 .buttonCloseSVG {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .article {
-    color: var(--text, #484848);
-    text-align: center;
-    font-family: $Lora;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 117%; /* 21.06px */
-    padding-bottom: 12px;
+  color: var(--text, #484848);
+  text-align: center;
+  font-family: $Lora;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 117%; /* 21.06px */
+  padding-bottom: 12px;
 }
 
 .input_items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .buttonSave {
@@ -62,11 +62,44 @@ $Lora: "Lora", serif;
   align-items: center;
 }
 
-
 .buttonSave.disable {
-    pointer-events: none;
-    opacity: 0.7;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
+.photoWrapper {
+  display: flex;
+  justify-content: center;
+}
 
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+}
 
+.addPhoto {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  color: #484848;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 117%;
+  background: #eaeaeb;
+  margin-bottom: 12px;
+  border-radius: 500px;
+}
+
+.addPhoto img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 500px;
+}
