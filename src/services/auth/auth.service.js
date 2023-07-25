@@ -10,17 +10,13 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      const role = jwtDecode(response.data);
-      if( role.role === 'Admin' ) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        window.location.reload();
-      }
+      console.log(response);
       return response.data;
     });
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("token");
 };
 
 const authService = {

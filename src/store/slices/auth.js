@@ -3,15 +3,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
 
 import AuthService from "../../services/auth/auth.service";
+import jwtDecode from "jwt-decode";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const token = JSON.parse(localStorage.getItem("token"));
 
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await AuthService.login(email, password);
-      return { user: data };
+      const role = jwtDecode(data);
+      if (role.role === "Admin") {
+        localStorage.setItem("token", JSON.stringify(data));
+        return { user: data };
+      }
     } catch (error) {
       const message =
         (error.response &&
@@ -29,8 +34,8 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 });
 
-const initialState = user
-  ? { isLoggedIn: true, user }
+const initialState = token
+  ? { isLoggedIn: true, user: token }
   : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({
@@ -38,22 +43,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(login.pending, (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.isLoggedIn = true;
-      state.user = action.payload;
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    });
-    builder.addCase(logout.fulfilled, (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    });
+    builder.addCase(login.fulfilled, (state, action) => ({
+      ...state,
+      isLoggedIn: true,
+      user: action.payload,
+    }));
+    builder.addCase(login.rejected, (state, action) => ({
+      ...state,
+      isLoggedIn: false,
+      user: null,
+    }));
+    builder.addCase(logout.fulfilled, (state, action) => ({
+      ...state,
+      isLoggedIn: false,
+      user: null,
+    }));
   },
 });
 

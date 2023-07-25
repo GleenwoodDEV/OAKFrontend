@@ -20,7 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  // const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,16 +28,16 @@ const Login = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => {
-        navigate('/users');
+        navigate("/users");
       })
       .catch(() => {
-        setLoading(false)
+        setLoading(false);
       });
   };
 
-  if(isLoggedIn) {
-    return <Navigate to="/users" />;
-  }
+  // if(isLoggedIn) {
+  //   return <Navigate to="/users" />;
+  // }
 
   return (
     <div className={formStyles.loginWrapper}>
@@ -54,7 +54,7 @@ const Login = () => {
             <div className={formStyles.inputItems}>
               <div className={formStyles.email}>
                 <InputText
-                  styleName='InputForm'
+                  styleName="InputForm"
                   labelName="Email"
                   value={email}
                   onChange={setEmail}
