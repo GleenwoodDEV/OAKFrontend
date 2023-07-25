@@ -1,0 +1,26 @@
+.toggleWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #a0a0a0;
+  width: 150px;
+  height: 48px;
+  color: #fff;
+  text-align: center;
+  font-family: Lora;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.toggleWrapper.active {
+  background-color: #484848;
+}
+
+.toggleWrapper svg {
+  display: flex;
+  padding-right: 8px;
+}

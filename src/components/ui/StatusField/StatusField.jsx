@@ -5,11 +5,8 @@ import Switch from "react-switch";
 const StatusField = (props) => {
   const [activeSwitch, setActiveSwitch] = useState(props.activeSwitch);
 
-  useEffect(() => {
-    setActiveSwitch(props.activeSwitch);
-  }, [props.activeSwitch]);
-
   const handleChange = (checked) => {
+    props.handleStatus(checked);
     setActiveSwitch(checked);
   };
 
@@ -17,11 +14,11 @@ const StatusField = (props) => {
     <>
       <div className={styles.wrapper}>
         <div
-          className={activeSwitch ? styles.labelTextGreen : styles.labelTextRed}
+          className={activeSwitch ? styles.labelTextRed : styles.labelTextGreen}
         >
           {activeSwitch
-            ? props.valueSwitcher.active
-            : props.valueSwitcher.disable}
+            ? props.valueSwitcher.disable
+            : props.valueSwitcher.active}
         </div>
         {props.editableMode ? (
           <Switch

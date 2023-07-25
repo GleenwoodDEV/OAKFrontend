@@ -17,7 +17,53 @@ export const businessApi = createApi({
         },
       ],
     }),
+    addBusiness: builder.mutation({
+      query: (body) => {
+        const newData = new FormData();
+        newData.append("file", body.file);
+        newData.append("name", body.name);
+        newData.append("buisnessType", body.buisnessType);
+        newData.append("pinX", body.pinX);
+        newData.append("pinY", body.pinY);
+        newData.append("workingHours", body.workingHours);
+        newData.append("phone", body.phone);
+        newData.append("link", body.link);
+        newData.append("instagram", body.instagram);
+        newData.append("address", body.address);
+
+        console.log(newData);
+        return {
+          url: `/`,
+          method: "POST",
+          body: newData,
+          formData: true,
+        };
+      },
+      invalidatesTags: () => [{ type: "business" }],
+    }),
+    updateBusiness: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/${id}`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: () => [{ type: "business" }],
+    }),
+    deleteBusiness: builder.mutation({
+      query(id) {
+        return {
+          url: `/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: () => [{ type: "business" }],
+    }),
   }),
 });
 
-export const { useGetBusinessQuery } = businessApi;
+export const {
+  useGetBusinessQuery,
+  useAddBusinessMutation,
+  useUpdateBusinessMutation,
+  useDeleteBusinessMutation,
+} = businessApi;

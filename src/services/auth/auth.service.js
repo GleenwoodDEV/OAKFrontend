@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const URL = "https://dolphin-app-4zl3e.ondigitalocean.app/auth/login";
 
@@ -9,12 +10,10 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      console.log(response);
-      if (response.data) {
-        console.log(response.data);
-        console.log(localStorage);
-        //localStorage.setItem("user", JSON.stringify(response.data));
-      } else {
+      const role = jwtDecode(response.data);
+      if( role.role === 'Admin' ) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        window.location.reload();
       }
       return response.data;
     });

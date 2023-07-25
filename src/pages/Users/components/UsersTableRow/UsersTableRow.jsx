@@ -1,30 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./UsersTableRow.module.scss";
 import { DeleteBtnSVG, EditBtnSVG, SaveBtnSVG } from "../../../../assets/icons";
 import StatusField from "../../../../components/ui/StatusField";
+import { useBanUsersMutation } from "../../../../store/api/UsersApi";
 
-const UsersTableRow = ({ handleSaveEditRow, rowData }) => {
+const UsersTableRow = ({ rowData }) => {
   const [editedRow, setEditedRow] = useState(null);
 
-  const { id, name, email, phone, status } = rowData;
+  const { id, name, email, phone, isBlocked } = rowData;
 
-  const handleSaveBtn = (id) => {
+  const [newBlockStatus, setNewBlockStatus] = useState(isBlocked);
+
+  const [banUser] = useBanUsersMutation();
+
+  const handleSaveBtn = () => {
     setEditedRow(null);
-    handleSaveEditRow(id);
+    if (isBlocked !== newBlockStatus) {
+      banUser(id);
+    }
   };
-
-  const handleChange = (e) => {};
+  const handleStatus = (checked) => {
+    setNewBlockStatus(checked);
+  };
 
   return (
     <tr key={id}>
       <td className={styles.id}>{id}</td>
 
       <td>{name}</td>
+      <td>{email}</td>
+      <td>{phone}</td>
       <td>
         <StatusField
           valueSwitcher={{ active: "Active", disable: "Banned" }}
-          activeSwitch={status}
+          activeSwitch={newBlockStatus}
           editableMode={id === editedRow}
+          handleStatus={handleStatus}
         />
       </td>
       <td className={styles.btnItems}>
