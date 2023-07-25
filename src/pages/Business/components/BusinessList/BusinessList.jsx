@@ -3,7 +3,7 @@ import BusinessNoInfoCap from "../BusinessNoInfoCap";
 import BusinessListItem from "../BusinessListItem/BusinessListItem";
 
 const BusinessList = (props) => {
-  const { data } = props;
+  const { data, onSelectBusiness } = props;
 
   if (!data || data.length === 0) {
     return <BusinessNoInfoCap />;
@@ -12,7 +12,11 @@ const BusinessList = (props) => {
   return (
     <div className={styles.business_items}>
       {data.map((item) => (
-        <BusinessListItem key={item.id} info={item} />
+        <BusinessListItem
+          key={item.id}
+          info={item}
+          onSelectBusiness={onSelectBusiness}
+        />
       ))}
     </div>
   );

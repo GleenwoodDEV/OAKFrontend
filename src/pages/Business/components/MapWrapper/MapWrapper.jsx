@@ -21,12 +21,15 @@ const MapWrapper = (props) => {
             x={item.pinX}
             y={item.pinY}
             type={item.buisnessType}
+            active={props.editBusiness && props.editBusiness.id === item.id}
+            onClick={() => props.onSelectBusiness(item)}
           />
         ))}
 
       {props.editPin &&
         props.mode !== "ADD_PIN_MODE" &&
-        props.mode !== "VIEW_MODE" && (
+        props.mode !== "VIEW_MODE" &&
+        !props.editBusiness && (
           <MapPin
             x={props.editPin.coords.x}
             y={props.editPin.coords.y}

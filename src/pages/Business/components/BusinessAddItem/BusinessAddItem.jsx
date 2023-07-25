@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddPhotoSVG,
   BarMiniIconSVG,
@@ -64,6 +64,22 @@ const BusinessAddItem = (props) => {
     props.onSave(values);
   };
 
+  useEffect(() => {
+    if (props.editBusiness) {
+      setInputs({
+        name: props.editBusiness.name,
+        address: props.editBusiness.address,
+        workingHours: props.editBusiness.workingHours,
+        phone: props.editBusiness.phone,
+        link: props.editBusiness.link,
+        instagram: props.editBusiness.instagram,
+        file: null,
+      });
+
+      setBuisnessType(props.editBusiness.buisnessType);
+    }
+  }, [props.editBusiness]);
+
   return (
     <div className={styles.business_card}>
       <div className={styles.article}>Add new Business</div>
@@ -90,7 +106,7 @@ const BusinessAddItem = (props) => {
         <InputText
           id="name"
           width={300}
-          labelName="BusinessName"
+          labelName="Business Name"
           value={inputs.name}
           onChange={handleChangeInputs}
         />
@@ -167,7 +183,15 @@ const BusinessAddItem = (props) => {
           </ButtonToggle>
         </div>
         <div className={styles.buttons}>
-          <ButtonCreate text="Delete" width={150} />
+          {props.editBusiness ? (
+            <ButtonCreate text="Delete" width={150} />
+          ) : (
+            <ButtonCreate
+              text="Cancel"
+              width={150}
+              onCustomClick={props.handleClose}
+            />
+          )}
           <ButtonCreate
             text="Save"
             width={150}

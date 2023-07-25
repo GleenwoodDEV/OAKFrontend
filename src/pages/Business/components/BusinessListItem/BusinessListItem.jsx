@@ -7,9 +7,12 @@ import {
   WebsiteSVG,
 } from "../../../../assets/icons";
 
-const BusinessListItem = ({ info }) => {
+const BusinessListItem = ({ info, onSelectBusiness }) => {
   return (
-    <div className={styles.business_card}>
+    <div
+      className={styles.business_card}
+      onClick={() => onSelectBusiness(info)}
+    >
       <img className={styles.cardPhoto} src={info.photo} alt="nophoto"></img>
       <div className={styles.business_info}>
         <div className={styles.description}>
