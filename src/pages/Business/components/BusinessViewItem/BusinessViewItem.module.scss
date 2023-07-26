@@ -30,13 +30,12 @@
   cursor: pointer;
 }
 
-.addPhoto {
+.photo {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 340px;
-  height: 200px;
   color: #484848;
   text-align: center;
   font-family: Inter;
@@ -48,48 +47,45 @@
   margin-bottom: 12px;
 }
 
-.addPhoto img {
+.photo img {
   object-fit: cover;
 }
 
-.inputItems {
+.info_items {
+  width: 300px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 12px;
+  justify-content: start;
 }
 
-.labelTypes {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 318px;
-  height: 17px;
+.item {
+  padding-bottom: 20px;
+}
+
+.label {
   color: #a0a0a0;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  padding-bottom: 10px;
 }
 
-.types {
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
-  gap: 16px;
-}
-
-.typeItem {
-  display: flex;
-  gap: 18px;
+.item_text {
+  color: #484848;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  word-break: break-all;
 }
 
 .buttons {
-  padding-top: 35px;
+  padding-top: 20px;
   display: flex;
-  gap: 18px;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
 }

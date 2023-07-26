@@ -31,8 +31,12 @@ const Business = () => {
     setEditBusiness(null);
   };
 
-  const handleSelectBusiness = (business) => {
+  const handleEditBusiness = () => {
     setPanelMode("EDIT_MODE");
+  };
+
+  const handleSelectBusiness = (business) => {
+    setPanelMode("VIEW_SELECT_MODE");
     setEditBusiness(business);
   };
 
@@ -86,6 +90,7 @@ const Business = () => {
                 onSave={handleSave}
                 onChangeType={setEditType}
                 onSelectBusiness={handleSelectBusiness}
+                onEditBusiness={handleEditBusiness}
                 editBusiness={editBusiness}
                 handleClose={handleClose}
               />

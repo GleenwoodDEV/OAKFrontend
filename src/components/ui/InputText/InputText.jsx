@@ -7,7 +7,10 @@ const InputText = (props) => {
       <label className={styles.label} htmlFor={styles.input}>
         <input
           id={props.id}
-          style={{ width: props.width, backgroundColor: props.backgroundColor }}
+          style={{
+            width: props.width,
+            backgroundColor: props.backgroundColor,
+          }}
           className={styles.input}
           onChange={(e) => props.onChange(e.target.value, e)}
           value={props.value}

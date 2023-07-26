@@ -3,8 +3,7 @@
 $inter: "Inter", sans-serif;
 $Lora: "Lora", serif;
 $basicColor: #484848;
-$labelColor: #A0A0A0;
-
+$labelColor: #a0a0a0;
 
 .input {
   font-family: $inter;
@@ -21,20 +20,18 @@ $labelColor: #A0A0A0;
   text-overflow: ellipsis;
 }
 
-
 .label {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
 .labeldiv {
-    color: $labelColor;
-    font-family: $inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding-left: 12px;
-    padding-bottom: 4px;
+  color: $labelColor;
+  font-family: $inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 12px;
+  padding-bottom: 4px;
 }

@@ -3,6 +3,7 @@ import {
   AddPhotoSVG,
   BarMiniIconSVG,
   CafeMiniIconSVG,
+  CancelButtonSVG,
   ClubMiniIconSVG,
   RestaurantMiniIconSVG,
 } from "../../../../assets/icons";
@@ -82,7 +83,14 @@ const BusinessAddItem = (props) => {
 
   return (
     <div className={styles.business_card}>
-      <div className={styles.article}>Add new Business</div>
+      <div className={styles.article}>
+        <div className={styles.cancel_button}>
+          <CancelButtonSVG onClick={props.handleClose} />
+        </div>
+        <div className={styles.article_text}>
+          {props.editBusiness ? "Edit Business" : "Add new Business"}
+        </div>
+      </div>
       <label htmlFor="file">
         <div id="addPhoto" className={styles.addPhoto}>
           {imgItemSrc ? (

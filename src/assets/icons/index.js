@@ -26,3 +26,4 @@ export { ReactComponent as BarMiniIconSVG } from "./bar-mini-icon.svg";
 export { ReactComponent as CafeMiniIconSVG } from "./cafe-mini.svg";
 export { ReactComponent as ClubMiniIconSVG } from "./club-mini.svg";
 export { ReactComponent as RestaurantMiniIconSVG } from "./restaurant-mini.svg";
+export { ReactComponent as CancelButtonSVG } from "./button-back.svg";
