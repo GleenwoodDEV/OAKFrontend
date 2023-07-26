@@ -4,12 +4,11 @@ $theader: #f0eff2;
 
 $inter: "Inter", sans-serif;
 
-
 .tablewrapper {
   border: 1px solid;
   border-color: $theader;
   border-radius: 10px 10px 0px 0px;
-  flex: 1
+  flex: 1;
 }
 
 table {
@@ -35,7 +34,8 @@ tr:hover {
   background-color: #f6f5f8;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid;
   border-color: $theader;
   height: 100%;

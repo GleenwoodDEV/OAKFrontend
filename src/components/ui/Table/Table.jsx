@@ -12,7 +12,7 @@ const Table = (props) => {
             ))}
           </tr>
         </thead>
-        <tbody>{children}</tbody>
+        <tbody className={styles.tbody}>{children}</tbody>
       </table>
     </div>
   );

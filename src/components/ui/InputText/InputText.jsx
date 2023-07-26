@@ -12,6 +12,7 @@ const InputText = (props) => {
             backgroundColor: props.backgroundColor,
           }}
           className={styles.input}
+          type={props.type}
           onChange={(e) => props.onChange(e.target.value, e)}
           value={props.value}
         />

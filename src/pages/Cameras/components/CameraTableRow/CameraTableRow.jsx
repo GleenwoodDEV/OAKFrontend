@@ -94,11 +94,13 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
       <InputCell
         value={timeOn}
         onChange={setTimeOn}
+        type="time"
         edited={id === editedRow}
       />
       <InputCell
         value={timeFinish}
         onChange={setTimeOff}
+        type="time"
         edited={id === editedRow}
       />
       <td>

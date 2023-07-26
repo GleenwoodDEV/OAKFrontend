@@ -35,8 +35,10 @@ const CreateModal = (props, setShowModal) => {
     setName("");
     setSlot1("");
     setSlot2("");
+    setTimeOn("");
     setTimeOff("");
     setImg(null);
+    setImgItemSrc("");
     props.handleCloseModal();
   };
 
@@ -110,12 +112,14 @@ const CreateModal = (props, setShowModal) => {
               backgroundColor="#F6F5F8"
               labelName="Switch on Time"
               value={timeOn}
+              type="time"
               onChange={setTimeOn}
             />
             <InputText
               backgroundColor="#F6F5F8"
               labelName="Switch off Time"
               value={timeFinish}
+              type="time"
               onChange={setTimeOff}
             />
           </div>

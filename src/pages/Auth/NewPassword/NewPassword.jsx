@@ -6,20 +6,35 @@ import { Link, useNavigate } from "react-router-dom";
 import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputPassword from "../../../components/ui/InputPassword";
 import { useChangePasswordMutation } from "../../../store/api/UsersApi";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const NewPassword = () => {
+  const { user } = useSelector((state) => state.auth);
+
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const [changePassword] = useChangePasswordMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newPassword === confirmPassword) {
-      const body = { password: oldPassword, newPassword: newPassword };
-      changePassword({ body })
+      const id = user.id;
+      const body = {
+        password: oldPassword,
+        newPassword: newPassword,
+      };
+      changePassword({ id, body })
         .unwrap()
         .then((payload) => navigate("/login"))
         .catch((error) => console.error("rejected", error));
