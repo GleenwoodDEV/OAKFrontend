@@ -4,6 +4,7 @@ import { setMessage } from "./message";
 
 import AuthService from "../../services/auth/auth.service";
 import jwtDecode from "jwt-decode";
+import { useState } from "react";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
@@ -12,10 +13,11 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await AuthService.login(email, password);
-      const role = jwtDecode(data);
-      if (role.role === "Admin") {
+      const decodeData = jwtDecode(data);
+
+      if (decodeData.role === "Admin") {
         localStorage.setItem("token", JSON.stringify(data));
-        return { user: data };
+        return decodeData;
       }
     } catch (error) {
       const message =
@@ -35,7 +37,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 });
 
 const initialState = token
-  ? { isLoggedIn: true, user: token }
+  ? { isLoggedIn: true, user: jwtDecode(token) }
   : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({

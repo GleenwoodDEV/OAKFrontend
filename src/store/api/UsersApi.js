@@ -46,9 +46,9 @@ export const usersApi = createApi({
       invalidatesTags: () => [{ type: "users" }],
     }),
     changePassword: builder.mutation({
-      query: ({ body }) => {
+      query: ({ id, body }) => {
         return {
-          url: `/1/changePassword`,
+          url: `/${id}/changePassword`,
           method: "PUT",
           body: body,
         };

@@ -12,6 +12,8 @@ import ButtonToggle from "../../../../components/ui/ButtonToggle";
 import InputText from "../../../../components/ui/InputText";
 import styles from "./BusinessAddItem.module.scss";
 import { useDeleteBusinessMutation } from "../../../../store/api/BusinessApi";
+import { useMemo } from "react";
+import clsx from "clsx";
 
 export const BusinessType = {
   bar: "bar",
@@ -35,6 +37,12 @@ const BusinessAddItem = (props) => {
     instagram: "",
     file: null,
   });
+
+  const disableSave = useMemo(
+    () =>
+      !inputs.name || !inputs.address || !inputs.workingHours || !inputs.file,
+    [inputs.name, inputs.address, inputs.workingHours, inputs.file]
+  );
 
   const handleChangeInputs = (value, e) => {
     setInputs({
@@ -75,6 +83,7 @@ const BusinessAddItem = (props) => {
 
   useEffect(() => {
     if (props.editBusiness) {
+      setImgItemSrc(props.editBusiness.photo);
       setInputs({
         name: props.editBusiness.name,
         address: props.editBusiness.address,
@@ -212,12 +221,16 @@ const BusinessAddItem = (props) => {
               onCustomClick={props.handleClose}
             />
           )}
-          <ButtonCreate
-            text="Save"
-            width={150}
-            backgroundColor={"#DC6B61"}
-            onCustomClick={handleSaveClick}
-          />
+          <div
+            className={clsx([styles.buttonSave, disableSave && styles.disable])}
+          >
+            <ButtonCreate
+              text="Save"
+              width={150}
+              backgroundColor={"#DC6B61"}
+              onCustomClick={handleSaveClick}
+            />
+          </div>
         </div>
       </div>
     </div>
