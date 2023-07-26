@@ -1,6 +1,11 @@
 import { useState } from "react";
 import styles from "./CameraTableRow.module.scss";
-import { DeleteBtnSVG, EditBtnSVG, SaveBtnSVG } from "../../../../assets/icons";
+import {
+  CameraImageSVG,
+  DeleteBtnSVG,
+  EditBtnSVG,
+  SaveBtnSVG,
+} from "../../../../assets/icons";
 import InputText from "../../../../components/ui/InputText";
 import StatusField from "../../../../components/ui/StatusField";
 import {
@@ -40,9 +45,41 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
     setNewBlockStatus(checked);
   };
 
+  const [imgItemSrc, setImgItemSrc] = useState("");
+
+  const handleChangeFile = (e) => {
+    const file = e.target.files.item(0);
+    if (file) {
+      setImgItemSrc(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <tr key={id}>
-      <td className={styles.id}>{id}</td>
+      <td className={styles.photo}>
+        {id === editedRow && (
+          <div className={styles.photo_wrapper}>
+            <label htmlFor="file">
+              <div id="addPhoto" className={styles.addPhoto}>
+                {imgItemSrc ? (
+                  <img src={imgItemSrc} alt="" />
+                ) : (
+                  <>
+                    <CameraImageSVG />
+                  </>
+                )}
+              </div>
+            </label>
+            <input
+              type="file"
+              id="file"
+              onChange={handleChangeFile}
+              accept="image/png, image/jpeg"
+              hidden
+            ></input>
+          </div>
+        )}
+      </td>
       <InputCell value={name} onChange={setName} edited={id === editedRow} />
       <InputCell
         value={rtspfeed1}

@@ -7,10 +7,9 @@ import { useState } from "react";
 import UsersTableRow from "./components/UsersTableRow/UsersTableRow";
 import { ThreeDots } from "react-loader-spinner";
 
-const headers = ["", "Name", "Email", "Phone", "Status", " "];
+const headers = ["Name", "Email", "Phone", "Status", " "];
 
 const Users = () => {
-  //const { isLoggedIn } = useSelector((state) => state.auth);
   const [searchValue, setSearchValue] = useState("");
   const { isLoading, data } = useGetUsersQuery(searchValue);
 
@@ -18,11 +17,6 @@ const Users = () => {
     e.preventDefault();
     setSearchValue(e.target.value);
   };
-
-  // if (!isLoggedIn) {
-  //   console.log(isLoggedIn);
-  //   return <Navigate to="/login" />;
-  // }
 
   return (
     <>

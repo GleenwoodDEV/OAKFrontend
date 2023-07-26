@@ -10,10 +10,11 @@ export const businessApi = createApi({
   }),
   endpoints: (builder) => ({
     getBusiness: builder.query({
-      query: () => `/`,
-      providesTags: () => [
+      query: (searchTerm) => `/search/?search=${searchTerm}`,
+      providesTags: (searchTerm) => [
         {
           type: "business",
+          id: searchTerm,
         },
       ],
     }),
@@ -42,11 +43,25 @@ export const businessApi = createApi({
       invalidatesTags: () => [{ type: "business" }],
     }),
     updateBusiness: builder.mutation({
-      query: ({ id, body }) => ({
-        url: `/${id}`,
-        method: "PUT",
-        body: body,
-      }),
+      query: ({ id, body }) => {
+        const newData = new FormData();
+        newData.append("file", body.file);
+        newData.append("name", body.name);
+        newData.append("buisnessType", body.buisnessType);
+        newData.append("pinX", body.pinX);
+        newData.append("pinY", body.pinY);
+        newData.append("workingHours", body.workingHours);
+        newData.append("phone", body.phone);
+        newData.append("link", body.link);
+        newData.append("instagram", body.instagram);
+        newData.append("address", body.address);
+
+        return {
+          url: `/${id}`,
+          method: "PUT",
+          body: body,
+        };
+      },
       invalidatesTags: () => [{ type: "business" }],
     }),
     deleteBusiness: builder.mutation({

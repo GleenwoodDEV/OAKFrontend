@@ -1,0 +1,62 @@
+.select {
+  display: flex;
+  justify-content: start;
+  width: 380px;
+  height: 48px;
+  color: var(--text, #484848);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  border-radius: 10px;
+  background-color: #f6f5f8;
+  padding-left: 20px;
+  padding-right: 50px;
+  appearance: none;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.option {
+  color: var(--text, #484848);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.labeldiv {
+  display: flex;
+  justify-content: start;
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 4px;
+  padding-left: 12px;
+  width: 100%;
+}
+
+.arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.selectWrap {
+  position: relative;
+}
