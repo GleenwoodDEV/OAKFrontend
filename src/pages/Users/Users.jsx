@@ -35,7 +35,7 @@ const Users = () => {
                   <UsersTableRow key={rowData.id} rowData={rowData} />
                 ))}
               </Table>
-              <Pagination />
+              {/* <Pagination /> */}
             </>
           ) : (
             <div className={styles.noDataCap}>No data</div>
