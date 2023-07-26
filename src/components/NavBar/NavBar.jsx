@@ -11,7 +11,7 @@ const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleShowMenu = () => {
-    !showMenu ? setShowMenu(true) : setShowMenu(false);
+    showMenu ? setShowMenu(false) : setShowMenu(true);
   };
 
   const location = useLocation().pathname;
@@ -26,13 +26,28 @@ const NavBar = () => {
                 <Logo />
               </div>
             </div>
-            <div className={clsx([styles.item, (location === '/users') && styles.active])}>
+            <div
+              className={clsx([
+                styles.item,
+                location === "/users" && styles.active,
+              ])}
+            >
               <Link to={"/users"}>Users</Link>
             </div>
-            <div className={clsx([styles.item, (location === '/business') && styles.active])}>
+            <div
+              className={clsx([
+                styles.item,
+                location === "/business" && styles.active,
+              ])}
+            >
               <Link to={"/business"}>Business</Link>
             </div>
-            <div className={clsx([styles.item, (location === '/cameras') && styles.active])}>
+            <div
+              className={clsx([
+                styles.item,
+                location === "/cameras" && styles.active,
+              ])}
+            >
               <Link to={"/cameras"}>Cameras</Link>
             </div>
           </div>
