@@ -8,14 +8,13 @@ $inter: "Inter", sans-serif;
   border: 1px solid;
   border-color: $theader;
   border-radius: 10px 10px 0px 0px;
-  flex: 1;
+  height: 100%;
 }
 
 table {
   width: 100%;
   text-align: center;
   border-spacing: 0;
-  overflow: hidden;
 }
 
 th {
@@ -24,6 +23,7 @@ th {
 }
 
 tr {
+  width: 100%;
   height: 48px;
   font-size: 16px;
   font-family: $inter;

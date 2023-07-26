@@ -31,11 +31,13 @@ const Users = () => {
           {data.length > 0 ? (
             <>
               <Table headers={headers}>
-                {data.map((rowData) => (
-                  <UsersTableRow key={rowData.id} rowData={rowData} />
-                ))}
+                {data.map((rowData) => {
+                  if (rowData.role !== "Admin") {
+                    return <UsersTableRow key={rowData.id} rowData={rowData} />;
+                  }
+                })}
               </Table>
-              <Pagination />
+              {/* <Pagination /> */}
             </>
           ) : (
             <div className={styles.noDataCap}>No data</div>
