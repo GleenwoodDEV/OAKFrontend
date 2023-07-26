@@ -28,11 +28,22 @@ export const camerasApi = createApi({
       invalidatesTags: () => [{ type: "cameras" }],
     }),
     updateCameras: builder.mutation({
-      query: ({ id, body }) => ({
-        url: `/${id}`,
-        method: "PUT",
-        body: body,
-      }),
+      query: ({ id, body }) => {
+        console.log(body);
+        const newData = new FormData();
+        newData.append("file", body.file);
+        newData.append("name", body.name);
+        newData.append("rtspfeed1", body.rtspfeed1);
+        newData.append("rtspfeed2", body.rtspfeed2);
+        newData.append("timeOn", body.timeOn);
+        newData.append("timeFinish", body.timeFinish);
+        return {
+          url: `/${id}`,
+          method: "PUT",
+          body: body,
+          formData: true,
+        };
+      },
       invalidatesTags: () => [{ type: "cameras" }],
     }),
     addCamera: builder.mutation({

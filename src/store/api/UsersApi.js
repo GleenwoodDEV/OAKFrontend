@@ -25,7 +25,43 @@ export const usersApi = createApi({
       }),
       invalidatesTags: () => [{ type: "users" }],
     }),
+    sendRecoveryCode: builder.mutation({
+      query: ({ body }) => {
+        return {
+          url: `/sendRecoveryCode`,
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: () => [{ type: "users" }],
+    }),
+    compareRecoveryCode: builder.mutation({
+      query: ({ body }) => {
+        return {
+          url: `/compareRecoveryCode`,
+          method: "POST",
+          body: body,
+        };
+      },
+      invalidatesTags: () => [{ type: "users" }],
+    }),
+    changePassword: builder.mutation({
+      query: ({ body }) => {
+        return {
+          url: `/1/changePassword`,
+          method: "PUT",
+          body: body,
+        };
+      },
+      invalidatesTags: () => [{ type: "users" }],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useBanUsersMutation } = usersApi;
+export const {
+  useGetUsersQuery,
+  useBanUsersMutation,
+  useSendRecoveryCodeMutation,
+  useCompareRecoveryCodeMutation,
+  useChangePasswordMutation,
+} = usersApi;

@@ -3,6 +3,7 @@ import {
   AddPhotoSVG,
   BarMiniIconSVG,
   CafeMiniIconSVG,
+  CancelButtonSVG,
   ClubMiniIconSVG,
   RestaurantMiniIconSVG,
 } from "../../../../assets/icons";
@@ -10,6 +11,7 @@ import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import ButtonToggle from "../../../../components/ui/ButtonToggle";
 import InputText from "../../../../components/ui/InputText";
 import styles from "./BusinessAddItem.module.scss";
+import { useDeleteBusinessMutation } from "../../../../store/api/BusinessApi";
 
 export const BusinessType = {
   bar: "bar",
@@ -21,6 +23,8 @@ export const BusinessType = {
 const BusinessAddItem = (props) => {
   const [buisnessType, setBuisnessType] = useState(BusinessType.bar);
   const [imgItemSrc, setImgItemSrc] = useState("");
+
+  const [deleteItem] = useDeleteBusinessMutation();
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -37,6 +41,11 @@ const BusinessAddItem = (props) => {
       ...inputs,
       [e.target.id]: value,
     });
+  };
+
+  const handleDeleteItem = () => {
+    deleteItem(props.editBusiness.id);
+    props.handleClose();
   };
 
   const handleChangeFile = (e) => {
@@ -82,7 +91,14 @@ const BusinessAddItem = (props) => {
 
   return (
     <div className={styles.business_card}>
-      <div className={styles.article}>Add new Business</div>
+      <div className={styles.article}>
+        <div className={styles.cancel_button}>
+          <CancelButtonSVG onClick={props.handleClose} />
+        </div>
+        <div className={styles.article_text}>
+          {props.editBusiness ? "Edit Business" : "Add new Business"}
+        </div>
+      </div>
       <label htmlFor="file">
         <div id="addPhoto" className={styles.addPhoto}>
           {imgItemSrc ? (
@@ -184,7 +200,11 @@ const BusinessAddItem = (props) => {
         </div>
         <div className={styles.buttons}>
           {props.editBusiness ? (
-            <ButtonCreate text="Delete" width={150} />
+            <ButtonCreate
+              text="Delete"
+              width={150}
+              onCustomClick={handleDeleteItem}
+            />
           ) : (
             <ButtonCreate
               text="Cancel"

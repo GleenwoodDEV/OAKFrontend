@@ -6,7 +6,11 @@ const ButtonCreate = (props) => {
       <button
         type="submit"
         className={styles.button}
-        style={{ width: props.width, backgroundColor: props.backgroundColor }}
+        style={{
+          width: props.width,
+          backgroundColor: props.backgroundColor,
+          color: props.textColor,
+        }}
       >
         {props.text}
       </button>

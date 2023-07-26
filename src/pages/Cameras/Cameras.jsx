@@ -19,7 +19,7 @@ const Cameras = (props) => {
   //const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headers = [
-    "",
+    "   ",
     "Camera Name",
     "Slot 1",
     "Slot 2",

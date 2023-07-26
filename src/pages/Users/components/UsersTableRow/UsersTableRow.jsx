@@ -25,8 +25,6 @@ const UsersTableRow = ({ rowData }) => {
 
   return (
     <tr key={id}>
-      <td className={styles.id}>{id}</td>
-
       <td>{name}</td>
       <td>{email}</td>
       <td>{phone}</td>

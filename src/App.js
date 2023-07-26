@@ -15,6 +15,7 @@ import Auth from "./pages/Auth/";
 import Cameras from "./pages/Cameras";
 import Business from "./pages/Business";
 import { useSelector } from "react-redux";
+import NewPassword from "./pages/Auth/NewPassword";
 
 function App() {
   const { pathname } = useLocation();
@@ -32,6 +33,7 @@ function App() {
         <Route path="users" element={<Users />} />
         <Route path="cameras" element={<Cameras />} />
         <Route path="business" element={<Business />} />
+        <Route path="newpassword" element={<NewPassword />} />
         <Route path="/" element={<Users />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
