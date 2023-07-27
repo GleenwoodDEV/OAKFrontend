@@ -51,8 +51,6 @@ export const businessApi = createApi({
         }
         newData.append("name", body.name);
         newData.append("buisnessType", body.buisnessType);
-        newData.append("pinX", body.pinX);
-        newData.append("pinY", body.pinY);
         newData.append("workingHours", body.workingHours);
         newData.append("phone", body.phone);
         newData.append("link", body.link);
@@ -62,7 +60,7 @@ export const businessApi = createApi({
         return {
           url: `/${body.id}`,
           method: "PUT",
-          body: body,
+          body: newData,
         };
       },
       invalidatesTags: () => [{ type: "business" }],
