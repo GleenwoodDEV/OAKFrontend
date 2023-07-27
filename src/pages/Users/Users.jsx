@@ -28,7 +28,7 @@ const Users = () => {
         <div className={styles.wrapper}>
           <InputSearch value={searchValue} onChange={handleSearch} />
 
-          {data.length > 0 ? (
+          {data && data.length > 0 ? (
             <>
               <Table headers={headers}>
                 {data.map((rowData) => {
