@@ -7,12 +7,14 @@ import React, { useState } from "react";
 import {
   useAddBusinessMutation,
   useGetBusinessQuery,
+  useUpdateBusinessMutation,
 } from "../../store/api/BusinessApi";
 import { ThreeDots } from "react-loader-spinner";
 import MapWrapper from "./components/MapWrapper";
 import BusinessInfoPanel from "./components/BusinessInfoPanel";
 import { BusinessType } from "./components/BusinessAddItem/BusinessAddItem";
 import CreateNotification from "./components/CreateNotification";
+import ShowConfirm from "../../components/ui/ShowConfirm/ShowConfirm";
 
 const Business = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -23,12 +25,14 @@ const Business = () => {
 
   const { isLoading, data } = useGetBusinessQuery(searchValue);
   const [addBusiness] = useAddBusinessMutation();
+  const [updateBusiness] = useUpdateBusinessMutation();
 
   const [panelMode, setPanelMode] = useState("VIEW_MODE");
   const [editCoordinates, setEditCoordinates] = useState({});
   const [editType, setEditType] = useState(BusinessType.bar);
   const [editBusiness, setEditBusiness] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleAddMod = () => {
     setPanelMode("ADD_PIN_MODE");
@@ -59,12 +63,15 @@ const Business = () => {
   };
 
   const handleAddSave = (values) => {
+    const id = editBusiness.id;
     const saveValues = {
       ...values,
+      id,
       pinX: editCoordinates.x,
       pinY: editCoordinates.y,
     };
-    addBusiness(saveValues);
+
+    editBusiness ? updateBusiness(saveValues) : addBusiness(saveValues);
     handleClose();
   };
 
@@ -75,11 +82,25 @@ const Business = () => {
     setShowModal(false);
   };
 
+  const handleOpenConfirmModal = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
     <>
       <CreateNotification
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+      />
+      <ShowConfirm
+        handleViewModClose={handleClose}
+        showConfirmModal={showConfirmModal}
+        handleCloseConfirmModal={handleCloseConfirmModal}
+        businessId={editBusiness?.id}
       />
       {isLoading ? (
         <div className={styles.spinner}>
@@ -109,6 +130,7 @@ const Business = () => {
                 onChangeType={setEditType}
                 onSelectBusiness={handleSelectBusiness}
                 onEditBusiness={handleEditBusiness}
+                handleOpenConfirmModal={handleOpenConfirmModal}
                 editBusiness={editBusiness}
                 handleClose={handleClose}
               />

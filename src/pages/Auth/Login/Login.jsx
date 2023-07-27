@@ -20,8 +20,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
 
-  // const { isLoggedIn } = useSelector((state) => state.auth);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -34,10 +32,6 @@ const Login = () => {
         setLoading(false);
       });
   };
-
-  // if(isLoggedIn) {
-  //   return <Navigate to="/users" />;
-  // }
 
   return (
     <div className={formStyles.loginWrapper}>

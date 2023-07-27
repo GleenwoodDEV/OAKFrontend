@@ -43,9 +43,12 @@ export const businessApi = createApi({
       invalidatesTags: () => [{ type: "business" }],
     }),
     updateBusiness: builder.mutation({
-      query: ({ id, body }) => {
+      query: (body) => {
+        console.log(body);
         const newData = new FormData();
-        newData.append("file", body.file);
+        if (body.file) {
+          newData.append("file", body.file);
+        }
         newData.append("name", body.name);
         newData.append("buisnessType", body.buisnessType);
         newData.append("pinX", body.pinX);
@@ -57,7 +60,7 @@ export const businessApi = createApi({
         newData.append("address", body.address);
 
         return {
-          url: `/${id}`,
+          url: `/${body.id}`,
           method: "PUT",
           body: body,
         };

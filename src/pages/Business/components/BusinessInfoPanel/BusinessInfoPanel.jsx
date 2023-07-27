@@ -12,6 +12,7 @@ const BusinessInfoPanel = (props) => {
     editBusiness,
     handleClose,
     onEditBusiness,
+    handleOpenConfirmModal,
   } = props;
 
   switch (mode) {
@@ -25,12 +26,14 @@ const BusinessInfoPanel = (props) => {
           editBusiness={editBusiness}
           handleClose={handleClose}
           onEditBusiness={onEditBusiness}
+          handleOpenConfirmModal={handleOpenConfirmModal}
         />
       );
     case "EDIT_MODE":
       return (
         <BusinessAddItem
           onSave={onSave}
+          handleOpenConfirmModal={handleOpenConfirmModal}
           editBusiness={editBusiness}
           onChangeType={props.onChangeType}
           handleClose={handleClose}

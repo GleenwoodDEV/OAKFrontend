@@ -3,9 +3,12 @@ import styles from "./UsersTableRow.module.scss";
 import { DeleteBtnSVG, EditBtnSVG, SaveBtnSVG } from "../../../../assets/icons";
 import StatusField from "../../../../components/ui/StatusField";
 import { useBanUsersMutation } from "../../../../store/api/UsersApi";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../../store/slices/message";
 
 const UsersTableRow = ({ rowData }) => {
   const [editedRow, setEditedRow] = useState(null);
+  const dispatch = useDispatch();
 
   const { id, name, email, phone, isBlocked } = rowData;
 
@@ -16,7 +19,29 @@ const UsersTableRow = ({ rowData }) => {
   const handleSaveBtn = () => {
     setEditedRow(null);
     if (isBlocked !== newBlockStatus) {
-      banUser(id);
+      banUser(id)
+        .unwrap()
+        .then((response) => {
+          console.log(response);
+          if (response.isBlocked === true) {
+            dispatch(
+              setMessage({
+                message: "User has been banned",
+                type: "success",
+              })
+            );
+          } else {
+            dispatch(
+              setMessage({
+                message: "User has been unbanned",
+                type: "success",
+              })
+            );
+          }
+        })
+        .catch((error) => {
+          dispatch(setMessage({ message: error.message, type: "error" }));
+        });
     }
   };
   const handleStatus = (checked) => {

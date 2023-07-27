@@ -28,19 +28,20 @@ export const camerasApi = createApi({
       invalidatesTags: () => [{ type: "cameras" }],
     }),
     updateCameras: builder.mutation({
-      query: ({ id, body }) => {
-        console.log(body);
+      query: (body) => {
         const newData = new FormData();
-        newData.append("file", body.file);
         newData.append("name", body.name);
+        if (body.file) {
+          newData.append("file", body.file);
+        }
         newData.append("rtspfeed1", body.rtspfeed1);
         newData.append("rtspfeed2", body.rtspfeed2);
         newData.append("timeOn", body.timeOn);
         newData.append("timeFinish", body.timeFinish);
         return {
-          url: `/${id}`,
+          url: `/${body.id}`,
           method: "PUT",
-          body: body,
+          body: newData,
           formData: true,
         };
       },
@@ -48,7 +49,6 @@ export const camerasApi = createApi({
     }),
     addCamera: builder.mutation({
       query: (body) => {
-        console.log(body);
         const newData = new FormData();
         newData.append("file", body.file);
         newData.append("name", body.name);
@@ -56,6 +56,7 @@ export const camerasApi = createApi({
         newData.append("rtspfeed2", body.rtspfeed2);
         newData.append("timeOn", body.timeOn);
         newData.append("timeFinish", body.timeFinish);
+        console.log(newData);
         return {
           url: `/`,
           method: "POST",
