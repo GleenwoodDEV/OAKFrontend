@@ -10,13 +10,15 @@ import CameraTableRow from "./components/CameraTableRow";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import ShowConfirm from "../../components/ui/ShowConfirm/ShowConfirm";
 
 const Cameras = (props) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
   const { isLoading, data } = useGetCamerasQuery(searchValue);
-  //const { isLoggedIn } = useSelector((state) => state.auth);
 
   const headers = [
     "   ",
@@ -36,6 +38,15 @@ const Cameras = (props) => {
     setShowModal(false);
   };
 
+  const handleOpenConfirmModal = (id) => {
+    setDeleteId(id);
+    setShowConfirmModal(true);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value);
@@ -53,6 +64,11 @@ const Cameras = (props) => {
             showModal={showModal}
             handleCloseModal={handleCloseModal}
           />
+          <ShowConfirm
+            deleteCameraId={deleteId}
+            showConfirmModal={showConfirmModal}
+            handleCloseConfirmModal={handleCloseConfirmModal}
+          />
           <div className={styles.search_bar}>
             <InputSearch value={searchValue} onChange={handleSearch} />
             <ButtonCreate
@@ -60,13 +76,14 @@ const Cameras = (props) => {
               onCustomClick={handleOpenModal}
             />
           </div>
-          {data.length > 0 ? (
+          {data && data.length > 0 ? (
             <Table headers={headers}>
               {data.map((rowData) => (
                 <CameraTableRow
                   key={rowData.id}
                   rowData={rowData}
-                  handleSaveEditRow={() => console.log("a")}
+                  handleOpenConfirmModal={handleOpenConfirmModal}
+                  handleCloseConfirmModal={handleCloseConfirmModal}
                 />
               ))}
             </Table>

@@ -10,8 +10,16 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      console.log(response);
       return response.data;
+    })
+    .catch((error) => {
+      if (error.response.data.statusCode === 500) {
+        throw new Error("Invalid email");
+      }
+      if (error.response.data.statusCode === 400) {
+        throw new Error("Invalid password");
+      }
+      throw new Error("Not login");
     });
 };
 

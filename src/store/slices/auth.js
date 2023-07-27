@@ -4,7 +4,6 @@ import { setMessage } from "./message";
 
 import AuthService from "../../services/auth/auth.service";
 import jwtDecode from "jwt-decode";
-import { useState } from "react";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
@@ -14,19 +13,12 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.login(email, password);
       const decodeData = jwtDecode(data);
-
       if (decodeData.role === "Admin") {
         localStorage.setItem("token", JSON.stringify(data));
         return decodeData;
       }
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
+      thunkAPI.dispatch(setMessage({ message: error.message, type: "error" }));
       return thunkAPI.rejectWithValue();
     }
   }

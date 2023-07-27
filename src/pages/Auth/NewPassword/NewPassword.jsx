@@ -2,7 +2,7 @@ import styles from "./NewPassword.module.scss";
 import { Logo } from "../../../assets/icons";
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputPassword from "../../../components/ui/InputPassword";
 import { useChangePasswordMutation } from "../../../store/api/UsersApi";
@@ -16,20 +16,20 @@ const NewPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   useEffect(() => {
-    console.log(user);
-    if (!user) {
+    if (!user && !state) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [user, navigate, state]);
 
   const [changePassword] = useChangePasswordMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newPassword === confirmPassword) {
-      const id = user.id;
+      const id = state?.id || user?.id;
       const body = {
         password: oldPassword,
         newPassword: newPassword,

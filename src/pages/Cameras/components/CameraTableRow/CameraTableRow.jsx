@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./CameraTableRow.module.scss";
 import {
   CameraImageSVG,
@@ -6,43 +5,86 @@ import {
   EditBtnSVG,
   SaveBtnSVG,
 } from "../../../../assets/icons";
-import InputText from "../../../../components/ui/InputText";
+
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+
 import StatusField from "../../../../components/ui/StatusField";
+import InputCell from "../../../../components/ui/InputCell";
+
 import {
   useChangeCameraStatusMutation,
   useDeleteCamerasMutation,
   useUpdateCamerasMutation,
 } from "../../../../store/api/CamerasApi";
-import InputCell from "../../../../components/ui/InputCell";
+import { setMessage } from "../../../../store/slices/message";
 
-const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
+const CameraTableRow = (props) => {
+  const dispatch = useDispatch();
+
   const [editedRow, setEditedRow] = useState(null);
+  const { id } = props.rowData;
+  const [name, setName] = useState(props.rowData.name);
+  const [rtspfeed1, setRtspfeed1] = useState(props.rowData.rtspfeed1);
+  const [rtspfeed2, setRtspfeed2] = useState(props.rowData.rtspfeed2);
+  const [timeOn, setTimeOn] = useState(props.rowData.timeOn);
+  const [timeFinish, setTimeOff] = useState(props.rowData.timeFinish);
+  const [status, setStatus] = useState(props.rowData.status);
+  const [file, setFile] = useState(null);
 
-  const { id } = rowData;
-  const [name, setName] = useState(rowData.name);
-  const [rtspfeed1, setRtspfeed1] = useState(rowData.rtspfeed1);
-  const [rtspfeed2, setRtspfeed2] = useState(rowData.rtspfeed2);
-  const [timeOn, setTimeOn] = useState(rowData.timeOn);
-  const [timeFinish, setTimeOff] = useState(rowData.timeFinish);
-  const [status, setStatus] = useState(!rowData.status);
+  const body = {
+    id,
+    name,
+    rtspfeed1,
+    rtspfeed2,
+    timeOn,
+    timeFinish,
+    status,
+    file,
+  };
 
-  const body = { name, rtspfeed1, rtspfeed2, timeOn, timeFinish, status };
+  const [newBlockStatus, setNewBlockStatus] = useState(status);
 
-  const [newBlockStatus, setNewBlockStatus] = useState("");
-
-  const [deleteRow] = useDeleteCamerasMutation();
   const [updateRow] = useUpdateCamerasMutation();
   const [changeCameraStatus] = useChangeCameraStatusMutation();
 
   const handleSaveBtn = () => {
-    setEditedRow(null);
     if (status !== newBlockStatus) {
-      changeCameraStatus(id);
+      changeCameraStatus(id)
+        .unwrap()
+        .then((response) => {
+          setStatus(response.status);
+          if (!response.status) {
+            dispatch(
+              setMessage({
+                message: "Camera off",
+                type: "success",
+              })
+            );
+          }
+          if (response.status) {
+            dispatch(
+              setMessage({
+                message: "Camera on",
+                type: "success",
+              })
+            );
+          }
+        })
+        .catch((error) => {
+          dispatch(setMessage({ message: error.message, type: "error" }));
+        });
     }
+    updateRow(body);
+    setEditedRow("");
+    setFile(null);
+    setImgItemSrc(null);
   };
 
   const handleStatus = (checked) => {
-    setNewBlockStatus(checked);
+    setNewBlockStatus(!checked);
   };
 
   const [imgItemSrc, setImgItemSrc] = useState("");
@@ -51,7 +93,12 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
     const file = e.target.files.item(0);
     if (file) {
       setImgItemSrc(URL.createObjectURL(file));
+      setFile(file);
     }
+  };
+
+  const handleDeleteRow = () => {
+    props.handleOpenConfirmModal(id);
   };
 
   return (
@@ -106,7 +153,7 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
       <td>
         <StatusField
           valueSwitcher={{ active: "On", disable: "Off" }}
-          activeSwitch={status}
+          activeSwitch={!status}
           editableMode={id === editedRow}
           handleStatus={handleStatus}
         />
@@ -123,7 +170,7 @@ const CameraTableRow = ({ handleSaveEditRow, rowData }) => {
             onClick={() => setEditedRow(id)}
           />
         )}
-        <DeleteBtnSVG className={styles.btnSVG} onClick={() => deleteRow(id)} />
+        <DeleteBtnSVG className={styles.btnSVG} onClick={handleDeleteRow} />
       </td>
     </tr>
   );

@@ -27,7 +27,9 @@ const VerificationCode = (props) => {
     const body = { email: state.email, code: verificationCode };
     compareRecoverCode({ body })
       .unwrap()
-      .then((payload) => navigate("/newpassword"))
+      .then((response) =>
+        navigate("/newpassword", { state: { id: response.userId } })
+      )
       .catch((error) => console.error("rejected", error));
   };
 

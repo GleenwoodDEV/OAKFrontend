@@ -1,14 +1,10 @@
 import { CancelButtonSVG } from "../../../../assets/icons";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
-import { useDeleteBusinessMutation } from "../../../../store/api/BusinessApi";
 import styles from "./BusinessViewItem.module.scss";
 
 const BusinessViewItem = (props) => {
-  const [deleteItem] = useDeleteBusinessMutation();
-
   const handleDeleteItem = () => {
-    deleteItem(props.editBusiness.id);
-    props.handleClose();
+    props.handleOpenConfirmModal();
   };
 
   return (

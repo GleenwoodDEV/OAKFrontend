@@ -38,10 +38,14 @@ const BusinessAddItem = (props) => {
     file: null,
   });
 
-  const disableSave = useMemo(
+  const disableSaveCreate = useMemo(
     () =>
       !inputs.name || !inputs.address || !inputs.workingHours || !inputs.file,
     [inputs.name, inputs.address, inputs.workingHours, inputs.file]
+  );
+  const disableSaveUpdate = useMemo(
+    () => !inputs.name || !inputs.address || !inputs.workingHours,
+    [inputs.name, inputs.address, inputs.workingHours]
   );
 
   const handleChangeInputs = (value, e) => {
@@ -52,8 +56,7 @@ const BusinessAddItem = (props) => {
   };
 
   const handleDeleteItem = () => {
-    deleteItem(props.editBusiness.id);
-    props.handleClose();
+    props.handleOpenConfirmModal();
   };
 
   const handleChangeFile = (e) => {
@@ -91,9 +94,10 @@ const BusinessAddItem = (props) => {
         phone: props.editBusiness.phone,
         link: props.editBusiness.link,
         instagram: props.editBusiness.instagram,
+        pinX: props.editBusiness.pinX,
+        pinY: props.editBusiness.pinY,
         file: null,
       });
-
       setBuisnessType(props.editBusiness.buisnessType);
     }
   }, [props.editBusiness]);
@@ -209,28 +213,48 @@ const BusinessAddItem = (props) => {
         </div>
         <div className={styles.buttons}>
           {props.editBusiness ? (
-            <ButtonCreate
-              text="Delete"
-              width={150}
-              onCustomClick={handleDeleteItem}
-            />
+            <>
+              <ButtonCreate
+                text="Delete"
+                width={150}
+                onCustomClick={handleDeleteItem}
+              />
+              <div
+                className={clsx([
+                  styles.buttonSave,
+                  disableSaveUpdate && styles.disable,
+                ])}
+              >
+                <ButtonCreate
+                  text="Save"
+                  width={150}
+                  backgroundColor={"#DC6B61"}
+                  onCustomClick={handleSaveClick}
+                />
+              </div>
+            </>
           ) : (
-            <ButtonCreate
-              text="Cancel"
-              width={150}
-              onCustomClick={props.handleClose}
-            />
+            <>
+              <ButtonCreate
+                text="Cancel"
+                width={150}
+                onCustomClick={props.handleClose}
+              />
+              <div
+                className={clsx([
+                  styles.buttonSave,
+                  disableSaveCreate && styles.disable,
+                ])}
+              >
+                <ButtonCreate
+                  text="Save"
+                  width={150}
+                  backgroundColor={"#DC6B61"}
+                  onCustomClick={handleSaveClick}
+                />
+              </div>
+            </>
           )}
-          <div
-            className={clsx([styles.buttonSave, disableSave && styles.disable])}
-          >
-            <ButtonCreate
-              text="Save"
-              width={150}
-              backgroundColor={"#DC6B61"}
-              onCustomClick={handleSaveClick}
-            />
-          </div>
         </div>
       </div>
     </div>

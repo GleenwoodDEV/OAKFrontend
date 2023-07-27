@@ -7,9 +7,12 @@ import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import clsx from "clsx";
 import { useMemo } from "react";
 import { useAddCameraMutation } from "../../../../store/api/CamerasApi";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../../store/slices/message";
 
 const CreateModal = (props, setShowModal) => {
   ReactModal.setAppElement("#root");
+  const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [rtspfeed1, setSlot1] = useState("");
@@ -29,9 +32,7 @@ const CreateModal = (props, setShowModal) => {
 
   const [addRow] = useAddCameraMutation();
 
-  const handleSaveRow = () => {
-    console.log(body);
-    addRow(body);
+  const clearState = () => {
     setName("");
     setSlot1("");
     setSlot2("");
@@ -39,7 +40,26 @@ const CreateModal = (props, setShowModal) => {
     setTimeOff("");
     setImg(null);
     setImgItemSrc("");
+  };
+
+  const handleSaveRow = () => {
+    addRow(body)
+      .unwrap()
+      .then((response) => {
+        dispatch(
+          setMessage({
+            message: "Camera has been added successfully",
+            type: "success",
+          })
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          setMessage({ message: "Camera has not been added", type: "error" })
+        );
+      });
     props.handleCloseModal();
+    clearState();
   };
 
   const handleChangeFile = (e) => {
