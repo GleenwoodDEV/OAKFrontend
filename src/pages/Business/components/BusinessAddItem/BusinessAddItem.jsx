@@ -26,8 +26,6 @@ const BusinessAddItem = (props) => {
   const [buisnessType, setBuisnessType] = useState(BusinessType.bar);
   const [imgItemSrc, setImgItemSrc] = useState("");
 
-  const [deleteItem] = useDeleteBusinessMutation();
-
   const [inputs, setInputs] = useState({
     name: "",
     address: "",
@@ -88,6 +86,7 @@ const BusinessAddItem = (props) => {
     if (props.editBusiness) {
       setImgItemSrc(props.editBusiness.photo);
       setInputs({
+        photo: props.editBusiness.photo,
         name: props.editBusiness.name,
         address: props.editBusiness.address,
         workingHours: props.editBusiness.workingHours,
@@ -96,7 +95,6 @@ const BusinessAddItem = (props) => {
         instagram: props.editBusiness.instagram,
         pinX: props.editBusiness.pinX,
         pinY: props.editBusiness.pinY,
-        file: null,
       });
       setBuisnessType(props.editBusiness.buisnessType);
     }

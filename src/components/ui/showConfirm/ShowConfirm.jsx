@@ -55,17 +55,17 @@ const ShowConfirm = (props) => {
               onClick={props.handleCloseConfirmModal}
             />
           </div>
-          <div className={styles.article}>Delete item?</div>
+          <div className={styles.article}>Confirm your action</div>
           <div className={styles.info_text}>
-            Do you really want to delete this item?
+            Do you really want to delete this?
           </div>
           <div className={styles.buttons}>
             <ButtonCreate
-              text="Confirm & Leave"
+              text="Yes"
               backgroundColor="#DC6B61"
               onCustomClick={handleSave}
             />
-            <ButtonCreate text="Leave" onCustomClick={handleCancel} />
+            <ButtonCreate text="Cancel" onCustomClick={handleCancel} />
           </div>
         </div>
       </ReactModal>

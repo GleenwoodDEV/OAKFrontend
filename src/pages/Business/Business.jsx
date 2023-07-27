@@ -63,15 +63,23 @@ const Business = () => {
   };
 
   const handleAddSave = (values) => {
-    const id = editBusiness.id;
-    const saveValues = {
-      ...values,
-      id,
-      pinX: editCoordinates.x,
-      pinY: editCoordinates.y,
-    };
-
-    editBusiness ? updateBusiness(saveValues) : addBusiness(saveValues);
+    if (editBusiness) {
+      const id = editBusiness.id;
+      const saveValues = {
+        ...values,
+        id,
+        pinX: editCoordinates.x,
+        pinY: editCoordinates.y,
+      };
+      updateBusiness(saveValues);
+    } else {
+      const saveValues = {
+        ...values,
+        pinX: editCoordinates.x,
+        pinY: editCoordinates.y,
+      };
+      addBusiness(saveValues);
+    }
     handleClose();
   };
 
