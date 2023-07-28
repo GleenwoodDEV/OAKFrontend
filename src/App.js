@@ -20,10 +20,12 @@ import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { pathname } = useLocation();
-
   const { isLoggedIn } = useSelector((state) => state.auth);
   const message = useSelector((state) => state.message);
+
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (!message) {
@@ -36,7 +38,7 @@ function App() {
 
   return (
     <>
-      {!isLoggedIn & !localStorage.getItem('token') ? (
+      {!isLoggedIn ? (
         <Auth />
       ) : (
         <div className="App">
