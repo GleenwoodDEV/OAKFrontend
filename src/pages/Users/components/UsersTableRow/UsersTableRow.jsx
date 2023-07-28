@@ -22,7 +22,6 @@ const UsersTableRow = ({ rowData }) => {
       banUser(id)
         .unwrap()
         .then((response) => {
-          console.log(response);
           if (response.isBlocked === true) {
             dispatch(
               setMessage({

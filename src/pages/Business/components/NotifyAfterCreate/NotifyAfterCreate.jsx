@@ -17,7 +17,6 @@ const NotifyAfterCreate = (props) => {
 
   const handleConfirm = () => {
     if (checked) {
-      console.log("send notify");
       props.handleCloseNotifyAfterCreate();
     } else {
       props.handleCloseNotifyAfterCreate();

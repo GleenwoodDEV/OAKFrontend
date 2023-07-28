@@ -13,13 +13,11 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.login(email, password);
       const decodeData = jwtDecode(data);
-      console.log(token);
       if (decodeData.role !== "Admin") {
-          throw new Error('You do not have administrator rights');
-      }
-      else {
-          localStorage.setItem("token", JSON.stringify(data));
-          return decodeData;
+        throw new Error("You do not have administrator rights");
+      } else {
+        localStorage.setItem("token", JSON.stringify(data));
+        return decodeData;
       }
     } catch (error) {
       thunkAPI.dispatch(setMessage({ message: error.message, type: "error" }));
