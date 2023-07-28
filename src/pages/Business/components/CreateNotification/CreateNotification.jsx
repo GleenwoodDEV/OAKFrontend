@@ -7,7 +7,7 @@ import { useState } from "react";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import { useMemo } from "react";
 import clsx from "clsx";
-import { useCreateNotificationMutation } from "../../../../store/api/BusinessApi";
+import { useCreateNotificationMutation } from "../../../../store/api/NotificationApi";
 
 const CreateNotification = (props) => {
   ReactModal.setAppElement("#root");
