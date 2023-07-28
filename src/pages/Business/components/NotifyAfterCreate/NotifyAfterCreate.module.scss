@@ -50,6 +50,20 @@ $Lora: "Lora", serif;
   padding-bottom: 12px;
 }
 
+.info_text {
+    color: var(--text, #484848);
+    text-align: center;
+    font-family: Lora;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0 auto;
+    line-height: 117%; /* 21.06px */
+    padding-bottom: 12px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
 .input_items {
   display: flex;
   flex-direction: column;
@@ -58,7 +72,10 @@ $Lora: "Lora", serif;
 }
 
 .buttonSave {
-  opacity: 1;
+  padding-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttonSave.disable {

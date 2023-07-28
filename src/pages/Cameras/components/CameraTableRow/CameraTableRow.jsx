@@ -77,7 +77,21 @@ const CameraTableRow = (props) => {
           dispatch(setMessage({ message: error.message, type: "error" }));
         });
     }
-    updateRow(body);
+    updateRow(body)
+      .unwrap()
+      .then((response) => {
+        dispatch(
+          setMessage({
+            message: "Camera has been updated successfully",
+            type: "success",
+          })
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          setMessage({ message: "Camera has not been updated", type: "error" })
+        );
+      });
     setEditedRow("");
     setFile(null);
     setImgItemSrc(null);

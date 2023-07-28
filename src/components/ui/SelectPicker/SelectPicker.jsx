@@ -8,10 +8,17 @@ const SelectPicker = (props) => {
         <div className={styles.labeldiv}>{props.labelName}</div>
         <div className={styles.selectWrap}>
           <ArrowDownSVG className={styles.arrow} />
-          <select id="select" className={styles.select}>
-            <option className={styles.option}>Business name</option>
-            <option className={styles.option}>asd</option>
-            <option className={styles.option}>asdasd</option>
+          <select
+            id="select"
+            className={styles.select}
+            onChange={props.handleChangeSelect}
+          >
+            <option className={styles.zerovalue} value=""></option>
+            {props.data.map((item) => (
+              <option key={item.id} className={styles.option} value={item.name}>
+                {item.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>

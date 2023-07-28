@@ -5,17 +5,43 @@ import SelectPicker from "../../../../components/ui/SelectPicker";
 import InputText from "../../../../components/ui/InputText";
 import { useState } from "react";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
+import { useMemo } from "react";
+import clsx from "clsx";
+import { useCreateNotificationMutation } from "../../../../store/api/BusinessApi";
 
 const CreateNotification = (props) => {
   ReactModal.setAppElement("#root");
   const [notificationText, setNotificationText] = useState("");
   const [imgItemSrc, setImgItemSrc] = useState("");
 
+  const [selectedBusiness, setSelectedBusiness] = useState("");
+  const [file, setFile] = useState(null);
+
+  const [createNotification] = useCreateNotificationMutation();
+
   const handleChangeFile = (e) => {
-    const file = e.target.files.item(0);
-    if (file) {
-      setImgItemSrc(URL.createObjectURL(file));
+    const fileitem = e.target.files.item(0);
+    if (fileitem) {
+      setImgItemSrc(URL.createObjectURL(fileitem));
+      setFile(fileitem);
     }
+  };
+
+  const disableSave = useMemo(
+    () => !selectedBusiness || !file,
+    [selectedBusiness, file]
+  );
+
+  const handleChangeSelect = (e) => {
+    e.preventDefault();
+    setSelectedBusiness(e.target.value);
+  };
+
+  const handleConfirm = () => {
+    setFile(null);
+    setSelectedBusiness("");
+    setImgItemSrc("");
+    props.handleCloseModal();
   };
 
   return (
@@ -37,7 +63,12 @@ const CreateNotification = (props) => {
 
           <div className={styles.article}>Create notification</div>
           <div className={styles.input_items}>
-            <SelectPicker labelName={"Choose Business"} />
+            <SelectPicker
+              labelName={"Choose Business"}
+              data={props.data}
+              value={selectedBusiness}
+              handleChangeSelect={handleChangeSelect}
+            />
             <InputText
               labelName={"Notification text"}
               backgroundColor={"#F6F5F8"}
@@ -64,7 +95,14 @@ const CreateNotification = (props) => {
               accept="image/png, image/jpeg"
               hidden
             ></input>
-            <ButtonCreate text={"Send"} />
+            <div
+              className={clsx([
+                styles.buttonSave,
+                disableSave && styles.disable,
+              ])}
+            >
+              <ButtonCreate text={"Send"} onCustomClick={handleConfirm} />
+            </div>
           </div>
         </div>
       </ReactModal>

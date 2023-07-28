@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      {!isLoggedIn ? (
+      {!isLoggedIn & !localStorage.getItem('token') ? (
         <Auth />
       ) : (
         <div className="App">

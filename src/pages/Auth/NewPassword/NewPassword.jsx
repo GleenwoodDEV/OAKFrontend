@@ -6,8 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputPassword from "../../../components/ui/InputPassword";
 import { useChangePasswordMutation } from "../../../store/api/UsersApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { setMessage } from "../../../store/slices/message";
 
 const NewPassword = () => {
   const { user } = useSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const NewPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { state } = useLocation();
 
   useEffect(() => {
@@ -36,10 +38,25 @@ const NewPassword = () => {
       };
       changePassword({ id, body })
         .unwrap()
-        .then((payload) => navigate("/login"))
-        .catch((error) => console.error("rejected", error));
+        .then((response) => {
+          dispatch(
+            setMessage({
+              message: "Password was successfully changed",
+              type: "success",
+            })
+          );
+          navigate("/login");
+        })
+        .catch((error) => {
+          dispatch(setMessage({ message: error.data.message, type: "error" }));
+        });
     } else {
-      console.log("check new passwords");
+      dispatch(
+        setMessage({
+          message: "Please, check fields with new password",
+          type: "error",
+        })
+      );
     }
   };
 

@@ -26,9 +26,11 @@ const Login = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => {
+        // if(localStorage.getItem('token')) {
         navigate("/users");
+        // }
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
       });
   };

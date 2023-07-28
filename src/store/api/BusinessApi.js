@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const URL = "https://dolphin-app-4zl3e.ondigitalocean.app/buisness";
+const URL = process.env.REACT_APP_BUSINESS_URL;
 
 export const businessApi = createApi({
   reducerPath: "businessApi",
@@ -74,6 +74,23 @@ export const businessApi = createApi({
       },
       invalidatesTags: () => [{ type: "business" }],
     }),
+    createNotification: builder.mutation({
+      query: (body) => {
+        const newData = new FormData();
+        newData.append("file", body.file);
+        newData.append("user_id", body.user_id);
+        newData.append("type", body.type);
+        newData.append("buisness_name", body.buisnessName);
+        console.log(newData);
+        return {
+          url: `/`,
+          method: "POST",
+          body: newData,
+          formData: true,
+        };
+      },
+      invalidatesTags: () => [{ type: "business" }],
+    }),
   }),
 });
 
@@ -82,4 +99,5 @@ export const {
   useAddBusinessMutation,
   useUpdateBusinessMutation,
   useDeleteBusinessMutation,
+  useCreateNotificationMutation,
 } = businessApi;

@@ -13,6 +13,7 @@ const BusinessInfoPanel = (props) => {
     handleClose,
     onEditBusiness,
     handleOpenConfirmModal,
+    handleOpenNotifyAfterCreate
   } = props;
 
   switch (mode) {
@@ -33,6 +34,7 @@ const BusinessInfoPanel = (props) => {
       return (
         <BusinessAddItem
           onSave={onSave}
+          handleOpenNotifyAfterCreate={handleOpenNotifyAfterCreate}
           handleOpenConfirmModal={handleOpenConfirmModal}
           editBusiness={editBusiness}
           onChangeType={props.onChangeType}
