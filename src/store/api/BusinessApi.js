@@ -32,7 +32,6 @@ export const businessApi = createApi({
         newData.append("instagram", body.instagram);
         newData.append("address", body.address);
 
-        console.log(newData);
         return {
           url: `/`,
           method: "POST",
@@ -44,7 +43,6 @@ export const businessApi = createApi({
     }),
     updateBusiness: builder.mutation({
       query: (body) => {
-        console.log(body);
         const newData = new FormData();
         if (body.file) {
           newData.append("file", body.file);
@@ -81,7 +79,6 @@ export const businessApi = createApi({
         newData.append("user_id", body.user_id);
         newData.append("type", body.type);
         newData.append("buisness_name", body.buisnessName);
-        console.log(newData);
         return {
           url: `/`,
           method: "POST",

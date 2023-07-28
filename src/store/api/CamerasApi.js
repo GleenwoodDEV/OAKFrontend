@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const URL = process.env.REACT_APP_CAMERA_URL;
-console.log(process.env);
 
 export const camerasApi = createApi({
   reducerPath: "camerasApi",
@@ -57,7 +56,6 @@ export const camerasApi = createApi({
         newData.append("rtspfeed2", body.rtspfeed2);
         newData.append("timeOn", body.timeOn);
         newData.append("timeFinish", body.timeFinish);
-        console.log(newData);
         return {
           url: `/`,
           method: "POST",
