@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const URL = "https://dolphin-app-4zl3e.ondigitalocean.app/users";
+const URL = process.env.REACT_APP_USERS_URL;
 
 export const usersApi = createApi({
   reducerPath: "usersApi",

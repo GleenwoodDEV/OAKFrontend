@@ -7,8 +7,11 @@ import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputText from "../../../components/ui/InputText";
 import ButtonBack from "../../../components/ui/ButtonBack";
 import { useSendRecoveryCodeMutation } from "../../../store/api/UsersApi";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../store/slices/message";
 const ForgotPassword = () => {
   const [emailValue, setEmailValue] = useState("");
+  const dispatch = useDispatch();
 
   const [sendRecoveryCode] = useSendRecoveryCodeMutation();
   const navigate = useNavigate();
@@ -18,10 +21,21 @@ const ForgotPassword = () => {
     const body = { email: emailValue };
     sendRecoveryCode({ body })
       .unwrap()
-      .then((payload) =>
-        navigate("/verificationcode", { state: { email: emailValue } })
-      )
-      .catch((error) => console.error("rejected", error));
+      .then((payload) => {
+        dispatch(
+          setMessage({
+            message:
+              "An email with a verification code has been sent to your email address. ",
+            type: "success",
+          })
+        );
+        navigate("/verificationcode", { state: { email: emailValue } });
+      })
+      .catch((error) => {
+        dispatch(
+          setMessage({ message: "Please, check your email", type: "error" })
+        );
+      });
   };
 
   return (

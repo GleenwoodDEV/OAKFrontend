@@ -8,10 +8,13 @@ import InputText from "../../../components/ui/InputText";
 import ButtonBack from "../../../components/ui/ButtonBack";
 import { useEffect } from "react";
 import { useCompareRecoveryCodeMutation } from "../../../store/api/UsersApi";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../store/slices/message";
 
 const VerificationCode = (props) => {
   const [verificationCode, setVerificationCode] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { state } = useLocation();
 
   const [compareRecoverCode] = useCompareRecoveryCodeMutation();
@@ -27,10 +30,17 @@ const VerificationCode = (props) => {
     const body = { email: state.email, code: verificationCode };
     compareRecoverCode({ body })
       .unwrap()
-      .then((response) =>
-        navigate("/newpassword", { state: { id: response.userId } })
-      )
-      .catch((error) => console.error("rejected", error));
+      .then((response) => {
+        dispatch(
+          setMessage({ message: "Recovery code is correct!", type: "success" })
+        );
+        navigate("/newpassword", { state: { id: response.userId } });
+      })
+      .catch((error) => {
+        dispatch(
+          setMessage({ message: "Invalid recovery code", type: "error" })
+        );
+      });
   };
 
   return (
@@ -48,7 +58,7 @@ const VerificationCode = (props) => {
             <div className={formStyles.inputItems}>
               <div className={formStyles.email}>
                 <InputText
-                  labelName="Email"
+                  labelName="Verification code"
                   value={verificationCode}
                   onChange={setVerificationCode}
                 />

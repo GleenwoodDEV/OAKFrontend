@@ -1,0 +1,18 @@
+.labeldiv {
+    color: #484848;
+    text-align: center;
+    font-family: Lora;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 117%; /* 21.06px */
+}
+
+.checkbox_wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding-bottom: 20px;
+   padding-top: 20px;
+}

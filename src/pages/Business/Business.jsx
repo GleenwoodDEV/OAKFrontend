@@ -15,8 +15,13 @@ import BusinessInfoPanel from "./components/BusinessInfoPanel";
 import { BusinessType } from "./components/BusinessAddItem/BusinessAddItem";
 import CreateNotification from "./components/CreateNotification";
 import ShowConfirm from "../../components/ui/ShowConfirm/ShowConfirm";
+import NotifyAfterCreate from "./components/NotifyAfterCreate/NotifyAfterCreate";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../store/slices/message";
 
 const Business = () => {
+  const dispatch = useDispatch();
+
   const [searchValue, setSearchValue] = useState("");
   const handleSearch = (e) => {
     e.preventDefault();
@@ -33,6 +38,7 @@ const Business = () => {
   const [editBusiness, setEditBusiness] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showNotifyAfterCreate, setShowNotifyAfterCreate] = useState(false);
 
   const handleAddMod = () => {
     setPanelMode("ADD_PIN_MODE");
@@ -71,14 +77,49 @@ const Business = () => {
         pinX: editCoordinates.x,
         pinY: editCoordinates.y,
       };
-      updateBusiness(saveValues);
+      updateBusiness(saveValues)
+        .unwrap()
+        .then((response) => {
+          dispatch(
+            setMessage({
+              message: "Business has been updated successfully",
+              type: "success",
+            })
+          );
+        })
+        .catch((error) => {
+          dispatch(
+            setMessage({
+              message: "Business has not been updated",
+              type: "error",
+            })
+          );
+        });
     } else {
       const saveValues = {
         ...values,
         pinX: editCoordinates.x,
         pinY: editCoordinates.y,
       };
-      addBusiness(saveValues);
+      addBusiness(saveValues)
+        .unwrap()
+        .then((response) => {
+          dispatch(
+            setMessage({
+              message: "Business has been added successfully",
+              type: "success",
+            })
+          );
+        })
+        .catch((error) => {
+          dispatch(
+            setMessage({
+              message: "Business has not been added",
+              type: "error",
+            })
+          );
+        });
+      handleOpenNotifyAfterCreate();
     }
     handleClose();
   };
@@ -98,17 +139,31 @@ const Business = () => {
     setShowConfirmModal(false);
   };
 
+  const handleOpenNotifyAfterCreate = () => {
+    setShowNotifyAfterCreate(true);
+  };
+
+  const handleCloseNotifyAfterCreate = () => {
+    setShowNotifyAfterCreate(false);
+  };
+
   return (
     <>
       <CreateNotification
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+        data={data}
       />
       <ShowConfirm
         handleViewModClose={handleClose}
         showConfirmModal={showConfirmModal}
         handleCloseConfirmModal={handleCloseConfirmModal}
         businessId={editBusiness?.id}
+      />
+      <NotifyAfterCreate
+        showNotifyAfterCreate={showNotifyAfterCreate}
+        handleCloseNotifyAfterCreate={handleCloseNotifyAfterCreate}
+        business={editBusiness}
       />
       {isLoading ? (
         <div className={styles.spinner}>
@@ -120,10 +175,13 @@ const Business = () => {
             <div className={styles.search_bar}>
               <InputSearch value={searchValue} onChange={handleSearch} />
               <div className={styles.search_btn_wrapper}>
-                <ButtonNotification
-                  text="Create Notification"
-                  onClick={handleOpenModal}
-                />
+                {data && data.length > 0 && (
+                  <ButtonNotification
+                    text="Create Notification"
+                    onClick={handleOpenModal}
+                  />
+                )}
+
                 <ButtonCreate
                   text="Add new Business"
                   onCustomClick={handleAddMod}
@@ -139,6 +197,7 @@ const Business = () => {
                 onSelectBusiness={handleSelectBusiness}
                 onEditBusiness={handleEditBusiness}
                 handleOpenConfirmModal={handleOpenConfirmModal}
+                handleOpenNotifyAfterCreate={handleOpenNotifyAfterCreate}
                 editBusiness={editBusiness}
                 handleClose={handleClose}
               />
