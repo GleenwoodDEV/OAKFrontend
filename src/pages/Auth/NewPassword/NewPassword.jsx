@@ -2,7 +2,7 @@ import styles from "./NewPassword.module.scss";
 import { Logo } from "../../../assets/icons";
 
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputPassword from "../../../components/ui/InputPassword";
 import { useChangePasswordMutation } from "../../../store/api/UsersApi";
