@@ -72,22 +72,6 @@ export const businessApi = createApi({
       },
       invalidatesTags: () => [{ type: "business" }],
     }),
-    createNotification: builder.mutation({
-      query: (body) => {
-        const newData = new FormData();
-        newData.append("file", body.file);
-        newData.append("user_id", body.user_id);
-        newData.append("type", body.type);
-        newData.append("buisness_name", body.buisnessName);
-        return {
-          url: `/`,
-          method: "POST",
-          body: newData,
-          formData: true,
-        };
-      },
-      invalidatesTags: () => [{ type: "business" }],
-    }),
   }),
 });
 
@@ -96,5 +80,4 @@ export const {
   useAddBusinessMutation,
   useUpdateBusinessMutation,
   useDeleteBusinessMutation,
-  useCreateNotificationMutation,
 } = businessApi;
