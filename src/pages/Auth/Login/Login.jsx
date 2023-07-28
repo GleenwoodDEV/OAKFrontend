@@ -2,15 +2,14 @@ import styles from "./Login.module.scss";
 import formStyles from "../Auth.module.scss";
 import { Logo } from "../../../assets/icons";
 
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import ButtonBack from "../../../components/ui/ButtonBack";
 import ButtonSubmit from "../../../components/ui/ButtonSubmit/ButtonSubmit";
 import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
 import { useState } from "react";
 import { login } from "../../../store/slices/auth";
-import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,21 +17,15 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => {
-        // if(localStorage.getItem('token')) {
         navigate("/users");
-        // }
       })
-      .catch((error) => {
-        setLoading(false);
-      });
+      .catch((error) => {});
   };
 
   return (
