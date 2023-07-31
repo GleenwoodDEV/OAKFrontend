@@ -2,8 +2,6 @@ import { useState } from "react";
 import styles from "./NotifyAfterCreate.module.scss";
 import ReactModal from "react-modal";
 import { CloseBtnSVG } from "../../../../assets/icons";
-import SelectPicker from "../../../../components/ui/SelectPicker";
-import InputText from "../../../../components/ui/InputText";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import CheckBox from "../../../../components/ui/CheckBox";
 import { useCreateNotificationMutation } from "../../../../store/api/NotificationApi";
