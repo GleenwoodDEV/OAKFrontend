@@ -117,7 +117,7 @@ const BusinessAddItem = (props) => {
           ) : (
             <>
               <AddPhotoSVG />
-              AddPhoto
+              Add Photo
             </>
           )}
         </div>

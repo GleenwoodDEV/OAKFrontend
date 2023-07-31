@@ -3,15 +3,16 @@
 $inter: "Inter", sans-serif;
 $Lora: "Lora", serif;
 $basicColor: #484848;
-$labelColor: #A0A0A0;
+$labelColor: #a0a0a0;
 
 .buttonForgot {
-    cursor: pointer;
-    padding-top: 24px;
-    font-family: $inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-  
+  cursor: pointer;
+  padding-top: 24px;
+  color: #484848;
+  font-family: $inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+}

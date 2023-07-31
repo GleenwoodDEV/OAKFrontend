@@ -63,9 +63,10 @@ const ForgotPassword = () => {
               </div>
             </div>
           </form>
-          <Link to={"/login"}>
-            <ButtonBack text="Back to Log in screen" />
-          </Link>
+          <ButtonBack
+            text="Back to Log in screen"
+            onClick={() => navigate("/login")}
+          ></ButtonBack>
         </div>
       </div>
     </div>

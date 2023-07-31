@@ -39,7 +39,7 @@ const BusinessViewItem = (props) => {
         </div>
         <div className={styles.item}>
           <div className={styles.label}>Website</div>
-          <div className={styles.item_text}>{props.editBusiness.website}</div>
+          <div className={styles.item_text}>{props.editBusiness.link}</div>
         </div>
         <div className={styles.item}>
           <div className={styles.label}>Instagram</div>

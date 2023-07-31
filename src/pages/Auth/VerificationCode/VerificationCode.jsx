@@ -68,9 +68,10 @@ const VerificationCode = (props) => {
               </div>
             </div>
           </form>
-          <Link to={"/forgotpassword"}>
-            <ButtonBack text="Change Email" />
-          </Link>
+          <ButtonBack
+            text="Change Email"
+            onClick={() => navigate("/forgotpassword")}
+          ></ButtonBack>
         </div>
       </div>
     </div>
