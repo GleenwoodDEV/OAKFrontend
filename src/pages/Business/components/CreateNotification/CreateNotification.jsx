@@ -13,6 +13,7 @@ const CreateNotification = (props) => {
   ReactModal.setAppElement("#root");
   const [notificationText, setNotificationText] = useState("");
   const [imgItemSrc, setImgItemSrc] = useState("");
+  const type = "anouncement";
 
   const [selectedBusiness, setSelectedBusiness] = useState("");
   const [file, setFile] = useState(null);
@@ -28,8 +29,8 @@ const CreateNotification = (props) => {
   };
 
   const disableSave = useMemo(
-    () => !selectedBusiness || !file,
-    [selectedBusiness, file]
+    () => !selectedBusiness || !file || !notificationText,
+    [selectedBusiness, file, notificationText]
   );
 
   const handleChangeSelect = (e) => {
@@ -37,10 +38,18 @@ const CreateNotification = (props) => {
     setSelectedBusiness(e.target.value);
   };
 
-  const handleConfirm = () => {
+  const clearState = () => {
     setFile(null);
     setSelectedBusiness("");
+    setNotificationText("");
     setImgItemSrc("");
+  };
+
+  const body = { file, notificationText, type, selectedBusiness };
+
+  const handleConfirm = () => {
+    createNotification(body);
+    clearState();
     props.handleCloseModal();
   };
 
