@@ -13,9 +13,9 @@ export const notificationApi = createApi({
       query: (body) => {
         const newData = new FormData();
         newData.append("file", body.file);
-        newData.append("user_id", body.user_id);
+        newData.append("text", body.notificationText);
         newData.append("type", body.type);
-        newData.append("buisness_name", body.buisnessName);
+        newData.append("buisness_name", body.selectedBusiness);
         return {
           url: `/`,
           method: "POST",

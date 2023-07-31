@@ -6,18 +6,32 @@ import SelectPicker from "../../../../components/ui/SelectPicker";
 import InputText from "../../../../components/ui/InputText";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import CheckBox from "../../../../components/ui/CheckBox";
+import { useCreateNotificationMutation } from "../../../../store/api/NotificationApi";
 
 const NotifyAfterCreate = (props) => {
   ReactModal.setAppElement("#root");
   const [checked, setChecked] = useState(false);
+  const file = props.saveValues?.file;
+  const type = "created";
+  const notificationText = `We have a new place ${props.saveValues?.name} at ${props.saveValues?.address}`;
+  const selectedBusiness = props.saveValues?.name;
+
+  const body = { file, type, notificationText, selectedBusiness };
 
   const handleChangeCheck = () => {
-    checked ? setChecked(false) : setChecked(true);
+    if (checked) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
   };
+  const [createNotification] = useCreateNotificationMutation();
 
   const handleConfirm = () => {
     if (checked) {
+      createNotification(body);
       props.handleCloseNotifyAfterCreate();
+      setChecked(false);
     } else {
       props.handleCloseNotifyAfterCreate();
     }

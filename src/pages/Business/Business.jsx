@@ -40,6 +40,8 @@ const Business = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showNotifyAfterCreate, setShowNotifyAfterCreate] = useState(false);
 
+  const [saveValues, setSaveValues] = useState(null);
+
   const handleAddMod = () => {
     setPanelMode("ADD_PIN_MODE");
     setEditBusiness(null);
@@ -104,12 +106,8 @@ const Business = () => {
       addBusiness(saveValues)
         .unwrap()
         .then((response) => {
-          dispatch(
-            setMessage({
-              message: "Business has been added successfully",
-              type: "success",
-            })
-          );
+          setSaveValues(saveValues);
+          handleOpenNotifyAfterCreate();
         })
         .catch((error) => {
           dispatch(
@@ -119,7 +117,6 @@ const Business = () => {
             })
           );
         });
-      handleOpenNotifyAfterCreate();
     }
     handleClose();
   };
@@ -163,7 +160,7 @@ const Business = () => {
       <NotifyAfterCreate
         showNotifyAfterCreate={showNotifyAfterCreate}
         handleCloseNotifyAfterCreate={handleCloseNotifyAfterCreate}
-        business={editBusiness}
+        saveValues={saveValues}
       />
       {isLoading ? (
         <div className={styles.spinner}>

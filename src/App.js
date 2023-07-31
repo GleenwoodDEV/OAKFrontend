@@ -24,10 +24,6 @@ function App() {
   const message = useSelector((state) => state.message);
 
   useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
-
-  useEffect(() => {
     if (!message) {
       return;
     }
