@@ -10,6 +10,7 @@ import { useDeleteBusinessMutation } from "../../../store/api/BusinessApi";
 const ShowConfirm = (props) => {
   const [deleteCamera] = useDeleteCamerasMutation();
   const [deleteBusiness] = useDeleteBusinessMutation();
+
   const dispatch = useDispatch();
 
   const handleSave = () => {
