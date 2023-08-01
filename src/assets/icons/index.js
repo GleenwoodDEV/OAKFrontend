@@ -30,3 +30,4 @@ export { ReactComponent as CancelButtonSVG } from "./button-back.svg";
 export { ReactComponent as ArrowDownSVG } from "./arrow-down.svg";
 export { ReactComponent as AddImageMiniSVG } from "./add-image-mini.svg";
 export { ReactComponent as CameraImageSVG } from "./image-mini-icon.svg";
+export { ReactComponent as OpenEyeSVG } from "./openeye.svg";
