@@ -59,6 +59,7 @@ export const businessApi = createApi({
           url: `/${body.id}`,
           method: "PUT",
           body: newData,
+          formData: true,
         };
       },
       invalidatesTags: () => [{ type: "business" }],

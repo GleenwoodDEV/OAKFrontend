@@ -3,7 +3,7 @@ import styles from "./Business.module.scss";
 
 import ButtonCreate from "../../components/ui/ButtonCreate";
 import ButtonNotification from "../../components/ui/ButtonNotification";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAddBusinessMutation,
   useGetBusinessQuery,
@@ -88,6 +88,8 @@ const Business = () => {
               type: "success",
             })
           );
+          handleClose();
+          // refetch();
         })
         .catch((error) => {
           dispatch(
@@ -96,6 +98,7 @@ const Business = () => {
               type: "error",
             })
           );
+          handleClose();
         });
     } else {
       const saveValues = {
@@ -108,6 +111,7 @@ const Business = () => {
         .then((response) => {
           setSaveValues(saveValues);
           handleOpenNotifyAfterCreate();
+          handleClose();
         })
         .catch((error) => {
           dispatch(
@@ -116,9 +120,10 @@ const Business = () => {
               type: "error",
             })
           );
+          handleClose();
         });
     }
-    handleClose();
+    //refetch();
   };
 
   const handleOpenModal = () => {
@@ -172,13 +177,10 @@ const Business = () => {
             <div className={styles.search_bar}>
               <InputSearch value={searchValue} onChange={handleSearch} />
               <div className={styles.search_btn_wrapper}>
-                {data && data.length > 0 && (
-                  <ButtonNotification
-                    text="Create Notification"
-                    onClick={handleOpenModal}
-                  />
-                )}
-
+                <ButtonNotification
+                  text="Create Notification"
+                  onClick={handleOpenModal}
+                />
                 <ButtonCreate
                   text="Add new Business"
                   onCustomClick={handleAddMod}

@@ -51,8 +51,8 @@ const NavBar = () => {
               <Link to={"/cameras"}>Cameras</Link>
             </div>
           </div>
-          <div className={styles.profile}>
-            <Avatar onClick={handleShowMenu} />{" "}
+          <div className={styles.profile} onClick={handleShowMenu}>
+            <Avatar />{" "}
             {showMenu && (
               <div className={styles.showMenuWrapper}>
                 <ShowMenu />

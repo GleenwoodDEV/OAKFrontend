@@ -1,6 +1,7 @@
 import styles from "./BusinessList.module.scss";
 import BusinessNoInfoCap from "../BusinessNoInfoCap";
 import BusinessListItem from "../BusinessListItem/BusinessListItem";
+import { useEffect, useState } from "react";
 
 const BusinessList = (props) => {
   const { data, onSelectBusiness } = props;

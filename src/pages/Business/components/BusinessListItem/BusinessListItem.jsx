@@ -6,6 +6,8 @@ import {
   PhoneSVG,
   WebsiteSVG,
 } from "../../../../assets/icons";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const BusinessListItem = ({ info, onSelectBusiness }) => {
   return (
@@ -21,12 +23,18 @@ const BusinessListItem = ({ info, onSelectBusiness }) => {
             <div className={styles.time_info}>{info.workingHours}</div>
           </div>
           <div className={styles.icons_div}>
-            <div className={styles.icon_background}>
+            <div
+              className={styles.icon_background}
+              onClick={(e) => e.stopPropagation()}
+            >
               <a href={info.link}>
                 <WebsiteSVG className={styles.icon} />
               </a>
             </div>
-            <div className={styles.icon_background}>
+            <div
+              className={styles.icon_background}
+              onClick={(e) => e.stopPropagation()}
+            >
               <a href={info.instagram}>
                 <InstagramSVG className={styles.icon} />
               </a>
