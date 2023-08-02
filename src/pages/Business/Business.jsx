@@ -81,7 +81,7 @@ const Business = () => {
       };
       updateBusiness(saveValues)
         .unwrap()
-        .then((response) => {
+        .then(() => {
           dispatch(
             setMessage({
               message: "Business has been updated successfully",

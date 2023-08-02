@@ -1,5 +1,6 @@
 import { CancelButtonSVG } from "../../../../assets/icons";
 import ButtonCreate from "../../../../components/ui/ButtonCreate";
+import { getUniqueSrcImg } from "../../../../helpers";
 import styles from "./BusinessViewItem.module.scss";
 
 const BusinessViewItem = (props) => {
@@ -16,7 +17,10 @@ const BusinessViewItem = (props) => {
         <div className={styles.article_text}>View Business</div>
       </div>
       <div className={styles.photo}>
-        <img src={props.editBusiness.photo} alt="nophoto"></img>
+        <img
+          src={getUniqueSrcImg(props.editBusiness.photo)}
+          alt="nophoto"
+        ></img>
       </div>
       <div className={styles.info_items}>
         <div className={styles.item}>

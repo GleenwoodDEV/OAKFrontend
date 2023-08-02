@@ -13,7 +13,7 @@ const BusinessInfoPanel = (props) => {
     handleClose,
     onEditBusiness,
     handleOpenConfirmModal,
-    handleOpenNotifyAfterCreate
+    handleOpenNotifyAfterCreate,
   } = props;
 
   switch (mode) {

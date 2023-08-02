@@ -1,13 +1,11 @@
 import styles from "./BusinessListItem.module.scss";
-import businessPhoto from "../../../../assets/business.png";
 import {
   InstagramSVG,
   LocationSVG,
   PhoneSVG,
   WebsiteSVG,
 } from "../../../../assets/icons";
-import { useState } from "react";
-import { useEffect } from "react";
+import { getUniqueSrcImg } from "../../../../helpers";
 
 const BusinessListItem = ({ info, onSelectBusiness }) => {
   return (
@@ -15,7 +13,12 @@ const BusinessListItem = ({ info, onSelectBusiness }) => {
       className={styles.business_card}
       onClick={() => onSelectBusiness(info)}
     >
-      <img className={styles.cardPhoto} src={info.photo} alt="nophoto"></img>
+      <img
+        src={getUniqueSrcImg(info.photo)}
+        className={styles.cardPhoto}
+        alt="nophoto"
+      ></img>
+
       <div className={styles.business_info}>
         <div className={styles.description}>
           <div className={styles.name_wrap}>
