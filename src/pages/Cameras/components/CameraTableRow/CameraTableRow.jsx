@@ -34,6 +34,8 @@ const CameraTableRow = (props) => {
   const [status, setStatus] = useState(props.rowData.status);
   const [file, setFile] = useState(null);
 
+  //const resultTimeOn = timeOn.toLocaleString("en-US");
+
   const body = {
     id,
     name,
@@ -155,13 +157,13 @@ const CameraTableRow = (props) => {
       <InputCell
         value={timeOn}
         onChange={setTimeOn}
-        type="time"
+        //type="time"
         edited={id === editedRow}
       />
       <InputCell
         value={timeFinish}
         onChange={setTimeOff}
-        type="time"
+        //type="time"
         edited={id === editedRow}
       />
       <td>
