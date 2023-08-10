@@ -132,14 +132,14 @@ const CreateModal = (props, setShowModal) => {
               backgroundColor="#F6F5F8"
               labelName="Switch on Time"
               value={timeOn}
-              type="time"
+              //type="time"
               onChange={setTimeOn}
             />
             <InputText
               backgroundColor="#F6F5F8"
               labelName="Switch off Time"
               value={timeFinish}
-              type="time"
+              //type="time"
               onChange={setTimeOff}
             />
           </div>
