@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-const URL = "https://dolphin-app-4zl3e.ondigitalocean.app/auth/login";
+const URL = process.env.REACT_APP_AUTH_URL;
 
 const login = (email, password) => {
   return axios
