@@ -5,11 +5,9 @@ import { useGetCamerasQuery } from "../../store/api/CamerasApi";
 import ButtonCreate from "../../components/ui/ButtonCreate";
 import { useState } from "react";
 import CreateModal from "./components/CreateModal";
-import { useEffect } from "react";
+
 import CameraTableRow from "./components/CameraTableRow";
 import { ThreeDots } from "react-loader-spinner";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import ShowConfirm from "../../components/ui/ShowConfirm/ShowConfirm";
 
 const Cameras = (props) => {
