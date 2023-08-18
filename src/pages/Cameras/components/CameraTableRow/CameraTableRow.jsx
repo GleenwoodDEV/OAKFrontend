@@ -147,7 +147,7 @@ const CameraTableRow = (props) => {
         value={name}
         onChange={setName}
         edited={id === editedRow}
-        width={100}
+        width={90}
       />
       <InputCell
         value={rtspfeed1}
