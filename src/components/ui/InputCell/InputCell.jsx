@@ -1,7 +1,7 @@
 import styles from "./InputCell.module.scss";
 
 const InputCell = (props) => (
-  <td>
+  <td className={styles.td}>
     {props.edited ? (
       <input
         style={{ width: props.width, background: props.background_color }}

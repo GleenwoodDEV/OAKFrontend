@@ -8,12 +8,16 @@ import ButtonCreate from "../../../../components/ui/ButtonCreate";
 import { useMemo } from "react";
 import clsx from "clsx";
 import { useCreateNotificationMutation } from "../../../../store/api/NotificationApi";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../../../store/slices/message";
 
 const CreateNotification = (props) => {
   ReactModal.setAppElement("#root");
   const [notificationText, setNotificationText] = useState("");
   const [imgItemSrc, setImgItemSrc] = useState("");
   const type = "anouncement";
+
+  const dispatch = useDispatch();
 
   const [selectedBusiness, setSelectedBusiness] = useState("");
   const [file, setFile] = useState(null);
@@ -48,8 +52,24 @@ const CreateNotification = (props) => {
   const body = { file, notificationText, type, selectedBusiness };
 
   const handleConfirm = () => {
-    createNotification(body);
-    clearState();
+    createNotification(body)
+      .unwrap()
+      .then(() => {
+        dispatch(
+          setMessage({
+            message: "Notification has been created successfully",
+            type: "success",
+          })
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          setMessage({
+            message: "Notification has not been added",
+            type: "error",
+          })
+        );
+      });
     props.handleCloseModal();
   };
 

@@ -143,24 +143,33 @@ const CameraTableRow = (props) => {
           </div>
         )}
       </td>
-      <InputCell value={name} onChange={setName} edited={id === editedRow} />
+      <InputCell
+        value={name}
+        onChange={setName}
+        edited={id === editedRow}
+        width={100}
+      />
       <InputCell
         value={rtspfeed1}
+        width={350}
         onChange={setRtspfeed1}
         edited={id === editedRow}
       />
       <InputCell
+        width={350}
         value={rtspfeed2}
         onChange={setRtspfeed2}
         edited={id === editedRow}
       />
       <InputCell
         value={timeOn}
+        width={50}
         onChange={setTimeOn}
         //type="time"
         edited={id === editedRow}
       />
       <InputCell
+        width={50}
         value={timeFinish}
         onChange={setTimeOff}
         //type="time"
